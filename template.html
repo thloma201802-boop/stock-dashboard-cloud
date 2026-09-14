@@ -1,0 +1,840 @@
+<title>多空訊號儀表板（雲端技術面版）</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#eef1ef; --surface:#ffffff; --surface-2:#f5f7f5; --border:#d7ddd8;
+  --ink:#16211c; --ink-soft:#4b5850;
+  --accent:#0d6e5c; --accent-soft:#e2f2ee;
+  --bull:#1f8a54; --bull-soft:#e5f5ea;
+  --bear:#c1443a; --bear-soft:#fbe9e7;
+  --neutral-signal:#8a7a3d; --neutral-soft:#f6f1df;
+  --shadow: 0 1px 2px rgba(20,30,25,.06), 0 4px 16px rgba(20,30,25,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1512; --surface:#121e19; --surface-2:#16241e; --border:#26362f;
+    --ink:#e8ede9; --ink-soft:#9fb0a6;
+    --accent:#3fc2a1; --accent-soft:#163a30;
+    --bull:#3ecb7c; --bull-soft:#123322;
+    --bear:#f0776a; --bear-soft:#3a1a17;
+    --neutral-signal:#d8c477; --neutral-soft:#332c14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 20px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1512; --surface:#121e19; --surface-2:#16241e; --border:#26362f;
+  --ink:#e8ede9; --ink-soft:#9fb0a6;
+  --accent:#3fc2a1; --accent-soft:#163a30;
+  --bull:#3ecb7c; --bull-soft:#123322;
+  --bear:#f0776a; --bear-soft:#3a1a17;
+  --neutral-signal:#d8c477; --neutral-soft:#332c14;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 20px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  padding:28px 20px 60px; min-height:100vh;
+}
+h1,h2,h3{font-family:"Newsreader",Georgia,serif; text-wrap:balance; margin:0;}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+.wrap{max-width:1180px; margin:0 auto;}
+
+header.top{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:16px;
+  flex-wrap:wrap; margin-bottom:22px; padding-bottom:18px; border-bottom:1px solid var(--border);
+}
+header.top h1{font-size:28px; font-weight:600; color:var(--ink);}
+header.top .sub{color:var(--ink-soft); font-size:13.5px; margin-top:6px; max-width:60ch;}
+header.top .meta{text-align:right; font-size:12px; color:var(--ink-soft);}
+header.top .meta .ts{font-family:"IBM Plex Mono",monospace; color:var(--accent); font-size:13px;}
+
+.watchlist{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:14px; margin-bottom:26px;
+}
+.tcard{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:16px; cursor:pointer; text-align:left; font:inherit; color:inherit;
+  box-shadow:var(--shadow); transition:border-color .15s ease, transform .15s ease;
+  display:flex; flex-direction:column; gap:10px;
+}
+.tcard:hover{border-color:var(--accent);}
+.tcard:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+.tcard.active{border-color:var(--accent); border-width:2px; padding:15px;}
+.tcard .row1{display:flex; justify-content:space-between; align-items:baseline;}
+.tcard .ticker{font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:16px;}
+.tcard .exch{font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em;}
+.tcard .price{font-family:"IBM Plex Mono",monospace; font-size:22px; font-weight:600;}
+.tcard .cur{font-size:11px; color:var(--ink-soft); margin-left:4px;}
+.pill{
+  display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:99px;
+  font-size:12px; font-weight:600; width:fit-content;
+}
+.pill.bull{background:var(--bull-soft); color:var(--bull);}
+.pill.bear{background:var(--bear-soft); color:var(--bear);}
+.pill.neutral{background:var(--neutral-soft); color:var(--neutral-signal);}
+.spark{width:100%; height:36px; display:block;}
+
+.detail{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:22px; box-shadow:var(--shadow); display:grid;
+  grid-template-columns:1.5fr 1fr; gap:24px;
+}
+@media (max-width:860px){ .detail{grid-template-columns:1fr;} }
+
+.detail-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:4px; grid-column:1/-1;}
+.detail-head h2{font-size:22px;}
+.detail-head .exch2{color:var(--ink-soft); font-size:13px;}
+.detail-head .price2{font-family:"IBM Plex Mono",monospace; font-size:20px; font-weight:600;}
+.profile-line{font-size:12.5px; color:var(--ink-soft); margin-top:4px; max-width:56ch; line-height:1.5;}
+
+.chart-col{display:flex; flex-direction:column; gap:6px;}
+.chart-box{position:relative;}
+.chart-box.main{height:230px;}
+.chart-box.sub{height:110px;}
+.chart-label{font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em; margin:10px 0 2px;}
+.legend{display:flex; gap:14px; font-size:11px; color:var(--ink-soft); flex-wrap:wrap; margin-top:4px;}
+.legend span{display:inline-flex; align-items:center; gap:5px;}
+.legend i{width:10px; height:2px; display:inline-block; border-radius:2px;}
+
+.side-col{display:flex; flex-direction:column; gap:18px;}
+.signal-card{background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px;}
+.signal-card .score-row{display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+.signal-card .score-row .pill{font-size:13px; padding:4px 12px;}
+.signal-card ul{margin:6px 0 0; padding-left:18px; font-size:13px; line-height:1.6;}
+.signal-card ul.bull li{color:var(--bull);}
+.signal-card ul.bear li{color:var(--bear);}
+.signal-card .empty{color:var(--ink-soft); font-size:12.5px; font-style:italic;}
+.horizon-row{display:flex; gap:8px; margin:6px 0 10px; flex-wrap:wrap;}
+.horizon-chip{
+  display:flex; align-items:center; gap:6px; padding:4px 10px; border-radius:7px;
+  font-size:11.5px; border:1px solid var(--border); background:var(--surface-2);
+}
+.horizon-chip .hname{color:var(--ink-soft);}
+.horizon-chip .hscore{color:var(--ink-soft);}
+.horizon-chip.bull{background:var(--bull-soft);}
+.horizon-chip.bull .hlabel{color:var(--bull); font-weight:600;}
+.horizon-chip.bear{background:var(--bear-soft);}
+.horizon-chip.bear .hlabel{color:var(--bear); font-weight:600;}
+.horizon-chip.neutral .hlabel{color:var(--neutral-signal); font-weight:600;}
+.reason-item{display:flex; align-items:baseline; gap:6px;}
+.reason-item .htag{
+  flex-shrink:0; font-size:9.5px; padding:0px 5px; border-radius:4px; font-weight:600;
+  background:var(--surface-2); color:var(--ink-soft); border:1px solid var(--border);
+}
+.thin-data-warn{font-size:11.5px; color:var(--neutral-signal); background:var(--neutral-soft); border-radius:6px; padding:5px 9px; margin-bottom:8px;}
+
+.stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.stat-tile{background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:10px 12px;}
+.stat-tile .label{font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em;}
+.stat-tile .value{font-family:"IBM Plex Mono",monospace; font-size:18px; font-weight:600; margin-top:3px;}
+.stat-tile .value.pos{color:var(--bull);}
+.stat-tile .value.neg{color:var(--bear);}
+.stat-note{font-size:11px; color:var(--ink-soft); margin-top:2px;}
+
+table.fund{width:100%; border-collapse:collapse; font-size:13px;}
+table.fund td{padding:6px 4px; border-bottom:1px solid var(--border);}
+table.fund td:first-child{color:var(--ink-soft);}
+table.fund td:last-child{text-align:right; font-family:"IBM Plex Mono",monospace; font-weight:500;}
+table.fund tr:last-child td{border-bottom:none;}
+
+.section-title{font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink);}
+
+.rel-strength{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+.rel-strength b{color:var(--ink); font-family:"IBM Plex Mono",monospace;}
+
+.news-list{display:flex; flex-direction:column; gap:10px;}
+.news-item{font-size:12.5px; line-height:1.5;}
+.news-item .row1{display:flex; justify-content:space-between; align-items:baseline; gap:8px;}
+.news-item .headline{color:var(--ink); font-weight:500;}
+.news-item .summary{color:var(--ink-soft); font-size:11.5px; margin-top:2px;}
+.news-item .meta{color:var(--ink-soft); font-size:11px; margin-top:2px;}
+
+.tcard .pnl{font-size:12px; font-weight:600;}
+.tcard .pnl.pos{color:var(--bull);}
+.tcard .pnl.neg{color:var(--bear);}
+
+.pos-card{background:var(--accent-soft); border:1px solid var(--border); border-radius:10px; padding:14px 16px;}
+.pos-card .pos-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; font-size:12.5px; margin-bottom:10px;}
+.pos-card .pos-grid .k{color:var(--ink-soft);}
+.pos-card .pos-grid .v{font-family:"IBM Plex Mono",monospace; text-align:right; font-weight:600;}
+.pos-card .pos-grid .v.pos{color:var(--bull);}
+.pos-card .pos-grid .v.neg{color:var(--bear);}
+.pos-card .note{font-size:12.5px; line-height:1.5; padding-top:10px; border-top:1px solid var(--border);}
+
+.market-tabs{display:flex; gap:4px; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:3px;}
+.market-tabs button{
+  border:none; background:transparent; padding:5px 14px; border-radius:6px; cursor:pointer;
+  font:inherit; font-size:12.5px; font-weight:600; color:var(--ink-soft);
+}
+.market-tabs button.active{background:var(--surface); color:var(--ink); box-shadow:var(--shadow);}
+
+.reco-section{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px; box-shadow:var(--shadow); margin-bottom:26px;
+}
+.reco-section .reco-head{display:flex; align-items:baseline; gap:8px; margin-bottom:14px;}
+.reco-section .reco-head h2{font-size:17px;}
+.reco-section .reco-head .note{font-size:11.5px; color:var(--ink-soft);}
+.reco-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+@media (max-width:700px){ .reco-cols{grid-template-columns:1fr;} }
+.reco-col-label{font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;}
+.reco-list{display:flex; flex-direction:column; gap:8px;}
+.reco-card{
+  display:flex; flex-direction:column; gap:4px; text-align:left; width:100%;
+  background:var(--bull-soft); border:1px solid var(--border); border-radius:9px;
+  padding:10px 12px; cursor:pointer; font:inherit; color:inherit;
+}
+.reco-card:hover{border-color:var(--bull);}
+.reco-card .row1{display:flex; justify-content:space-between; align-items:baseline;}
+.reco-card .t{font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:13.5px;}
+.reco-card .px{font-family:"IBM Plex Mono",monospace; font-size:13px;}
+.reco-card .reason{font-size:11.5px; color:var(--ink-soft); line-height:1.4;}
+.reco-empty{font-size:12.5px; color:var(--ink-soft); font-style:italic; padding:8px 0;}
+
+.port-table, .fa-table{border:1px solid var(--border); border-radius:9px; overflow:hidden; margin-top:10px;}
+.port-row, .fa-row{
+  display:grid; gap:8px; padding:7px 12px; font-size:12px; align-items:center;
+  border-bottom:1px solid var(--border);
+}
+.port-row{grid-template-columns:70px 1.3fr 90px 60px 90px;}
+.fa-row{grid-template-columns:1.2fr 90px 80px 70px 90px;}
+.fa-row.cols4{grid-template-columns:70px 1.2fr 80px 80px;}
+.port-row:last-child, .fa-row:last-child{border-bottom:none;}
+.port-head, .fa-head{
+  background:var(--surface-2); font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;
+}
+.port-row .sector{color:var(--ink-soft); font-size:11.5px;}
+.fa-row.weak{background:var(--bear-soft);}
+.mono.pos{color:var(--bull);}
+.mono.neg{color:var(--bear);}
+
+footer{max-width:1180px; margin:30px auto 0; color:var(--ink-soft); font-size:12px; line-height:1.7; border-top:1px solid var(--border); padding-top:16px;}
+footer b{color:var(--ink);}
+
+.group-head{display:flex; align-items:baseline; gap:8px; margin:26px 0 12px;}
+.group-head:first-of-type{margin-top:0;}
+.group-head h2{font-size:17px;}
+.group-head .count{color:var(--ink-soft); font-size:12.5px;}
+
+.wl-table{background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; box-shadow:var(--shadow); margin-bottom:26px;}
+.wl-head-row{display:grid; grid-template-columns:64px 1fr 84px 76px 116px 96px; gap:10px; padding:8px 14px; font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid var(--border); background:var(--surface-2);}
+.wl-row{
+  display:grid; grid-template-columns:64px 1fr 84px 76px 116px 96px; gap:10px; align-items:center;
+  width:100%; padding:9px 14px; border:none; border-bottom:1px solid var(--border);
+  background:transparent; font:inherit; color:inherit; text-align:left; cursor:pointer;
+}
+.wl-table .wl-row:last-child{border-bottom:none;}
+.wl-row:hover{background:var(--surface-2);}
+.wl-row.active{background:var(--accent-soft);}
+.wl-row .t{font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:13px;}
+.wl-row .nm{color:var(--ink-soft); font-size:11.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.wl-row .px{font-family:"IBM Plex Mono",monospace; text-align:right; font-size:13px;}
+.wl-row .chg{font-family:"IBM Plex Mono",monospace; text-align:right; font-size:12px;}
+.wl-row .chg.pos{color:var(--bull);}
+.wl-row .chg.neg{color:var(--bear);}
+.wl-row .pill{font-size:11px; padding:2px 8px; justify-self:end;}
+
+.stk{display:flex; align-items:center; justify-content:center; gap:3px; font-family:"IBM Plex Mono",monospace; font-size:12.5px;}
+.stk .sep{color:var(--border); font-size:10px;}
+.stk b{font-weight:600;}
+.stk b.up{color:var(--bull);}
+.stk b.down{color:var(--bear);}
+.stk b.na{color:var(--ink-soft); font-weight:400;}
+.stk b.ref{color:var(--ink-soft); font-weight:600; font-style:italic;}
+.stk-status .v.ref{color:var(--ink-soft); font-style:italic;}
+.stk .mark{font-size:9px; margin-left:1px;}
+.stk .mark.hit{color:var(--bull);}
+.stk .mark.miss{color:var(--bear);}
+.stk-line{font-size:11.5px; color:var(--ink-soft); display:flex; align-items:center; gap:5px; flex-wrap:wrap;}
+.stk-status{display:flex; align-items:center; gap:14px; flex-wrap:wrap; background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:10px 14px; margin-bottom:10px;}
+.stk-status .grp{display:flex; flex-direction:column; align-items:center; gap:3px;}
+.stk-status .grp .k{font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;}
+.stk-status .grp .v{font-family:"IBM Plex Mono",monospace; font-size:16px; font-weight:600;}
+.stk-status .arrow-sep{color:var(--border); font-size:16px;}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>多空訊號儀表板（雲端技術面版）</h1>
+      <div class="sub">純技術面自動化版本，由GitHub Actions排程執行，不依賴任何個人電腦、不含真實持股部位/成本/損益，也不含基本面與新聞（那些需要AI摘要，仍在本機版處理）。結合均線、RSI、MACD、布林通道、成交量、K線形態、週線趨勢與 RSI 背離判斷多空傾向，並用歷史資料回測。</div>
+    </div>
+    <div class="meta">
+      資料時間<br><span class="ts" id="asOf">—</span>
+    </div>
+  </header>
+
+  <div class="reco-section">
+    <div class="reco-head">
+      <h2>今日推薦</h2>
+      <span class="note">自選股中多方訊號分數最高的股票（分數需 ≥2 才會列入，門檻不到就寧可少於3檔），僅供技術面參考</span>
+    </div>
+    <div class="reco-cols">
+      <div>
+        <div class="reco-col-label">美股</div>
+        <div class="reco-list" id="recoUs"></div>
+      </div>
+      <div>
+        <div class="reco-col-label">港股</div>
+        <div class="reco-list" id="recoHk"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group-head"><h2>持股</h2><span class="count" id="holdingsCount"></span></div>
+  <div class="watchlist" id="holdings"></div>
+
+  <div class="group-head" style="justify-content:space-between">
+    <div style="display:flex; align-items:baseline; gap:8px"><h2>自選股</h2><span class="count" id="watchlistCount"></span></div>
+    <div class="market-tabs" id="marketTabs">
+      <button data-market="us">美股</button>
+      <button data-market="hk">港股</button>
+    </div>
+  </div>
+  <div class="wl-table" id="watchlistTable"></div>
+
+  <div class="detail" id="detail"></div>
+
+  <div class="reco-section">
+    <div class="reco-head">
+      <h2>系統校準報告</h2>
+      <span class="note">回頭檢查過去2年，每個技術因子發出訊號後，實際的後續報酬命中率——這是誠實面對系統準不準，不是事後選好看的數字</span>
+    </div>
+    <div id="factorAccuracyBody"></div>
+  </div>
+
+  <div class="reco-section">
+    <div class="reco-head">
+      <h2>預測命中率追蹤</h2>
+      <span class="note">每天為短/中/長線各做一次方向預測並記錄，等時間到了才回頭驗證對不對——完全沒有事後諸葛的空間，比校準報告更嚴謹（但需要時間累積樣本）</span>
+    </div>
+    <div id="predictionBody"></div>
+  </div>
+
+  <footer>
+    本頁僅供技術面／基本面資訊參考，<b>不構成投資建議</b>。回測績效是特定期間、特定規則下的歷史結果，不代表未來報酬；均線交叉等訊號在盤整走勢中容易出現連續假訊號。價格與基本面資料擷取自 Yahoo Finance 與 stockanalysis.com，可能有延遲。若要更新觀察名單或改用其他股票，請直接告訴 Claude 想追蹤的美股／港股代碼。
+  </footer>
+</div>
+
+<script>
+const DATA = __DATA_JSON__;
+const FUND = __FUND_JSON__;
+const NEWS = __NEWS_JSON__;
+const ORDER = __ORDER_JSON__;
+const HOLDINGS = __HOLDINGS_JSON__;
+const WATCHLIST = __WATCHLIST_JSON__;
+const WATCHLIST_US = __WATCHLIST_US_JSON__;
+const WATCHLIST_HK = __WATCHLIST_HK_JSON__;
+const RECOMMENDATIONS = __RECOMMENDATIONS_JSON__;
+const FACTOR_ACCURACY = __FACTOR_ACCURACY_JSON__;
+const PREDICTION_ACCURACY = __PREDICTION_ACCURACY_JSON__;
+const BASELINE_ACCURACY = __BASELINE_ACCURACY_JSON__;
+let currentMarket = 'us';
+const HORIZON_NAMES = {short:'短線', medium:'中線', long:'長線'};
+const GENERATED_AT = __GENERATED_AT__;
+
+document.getElementById('asOf').textContent = GENERATED_AT;
+
+function fmtNum(n, d=2){ return (n===null||n===undefined||Number.isNaN(n)) ? '—' : n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}); }
+function fmtPct(n){ if(n===null||n===undefined) return '—'; const s = n>0?'+':''; return s+n.toFixed(1)+'%'; }
+function pillClass(label){ if(label.indexOf('偏多')>=0) return 'bull'; if(label.indexOf('偏空')>=0) return 'bear'; return 'neutral'; }
+
+function stkArrow(dir){ return dir==='up' ? '↑' : dir==='down' ? '↓' : '–'; }
+function stkClass(dir, isRef){ if(isRef) return 'ref'; return dir==='up' ? 'up' : dir==='down' ? 'down' : 'na'; }
+
+function stkTrackHtml(ticker){
+  const sv = DATA[ticker] && DATA[ticker].short_view;
+  if(!sv) return '<span class="stk"><b class="na">–</b></span>';
+  const predToday = sv.today_predicted, actToday = sv.today_actual, predTomorrow = sv.tomorrow_predicted;
+  const todayIsRef = sv.today_source === 'baseline';
+  const tomorrowIsRef = sv.tomorrow_source === 'baseline';
+  const markHtml = predToday===null ? '' : `<span class="mark ${sv.today_hit?'hit':'miss'}">${sv.today_hit?'✓':'✕'}</span>`;
+  const srcNote = s => s==='baseline' ? '（對照組參考猜測，非系統訊號）' : s==='signal' ? '（系統技術訊號）' : '';
+  const title = `本日預測 ${predToday?stkArrow(predToday):'尚無前一日預測'}${srcNote(sv.today_source)}／本日實際 ${actToday?stkArrow(actToday):'尚無資料'}${predToday!==null?(sv.today_hit?'（命中）':'（未中）'):''}／明日預測 ${predTomorrow?stkArrow(predTomorrow):'今日無明顯短線訊號'}${srcNote(sv.tomorrow_source)}`;
+  return `<span class="stk" title="${title}">
+    <b class="${stkClass(predToday, todayIsRef)}">${stkArrow(predToday)}</b>
+    <span class="sep">›</span>
+    <b class="${stkClass(actToday, todayIsRef)}">${stkArrow(actToday)}</b>${markHtml}
+    <span class="sep">›</span>
+    <b class="${stkClass(predTomorrow, tomorrowIsRef)}">${stkArrow(predTomorrow)}</b>
+  </span>`;
+}
+
+function buildShortTrackingBlock(ticker){
+  const st = DATA[ticker] && DATA[ticker].short_tracking;
+  const bt = DATA[ticker] && DATA[ticker].baseline_tracking;
+  const sv = DATA[ticker] && DATA[ticker].short_view;
+  if(!st || !sv) return '';
+  const predToday = sv.today_predicted, actToday = sv.today_actual, predTomorrow = sv.tomorrow_predicted;
+  const todayIsRef = sv.today_source === 'baseline';
+  const tomorrowIsRef = sv.tomorrow_source === 'baseline';
+  const statusHtml = `
+    <div class="stk-status">
+      <div class="grp"><span class="k">本日預測${todayIsRef?'（參考）':''}</span><span class="v ${stkClass(predToday, todayIsRef)}">${stkArrow(predToday)}</span></div>
+      <span class="arrow-sep">›</span>
+      <div class="grp"><span class="k">本日實際</span><span class="v ${stkClass(actToday, todayIsRef)}">${stkArrow(actToday)}${predToday!==null?`<span class="mark ${sv.today_hit?'hit':'miss'}" style="font-size:11px">${sv.today_hit?' 命中':' 未中'}</span>`:''}</span></div>
+      <span class="arrow-sep">›</span>
+      <div class="grp"><span class="k">明日預測${tomorrowIsRef?'（參考）':''}</span><span class="v ${stkClass(predTomorrow, tomorrowIsRef)}">${stkArrow(predTomorrow)}</span></div>
+      <div class="grp" style="margin-left:auto"><span class="k">本股系統訊號命中率</span><span class="v">${st.hit_rate_pct!==null?st.hit_rate_pct+'%':'累積中'}（${st.hits}/${st.total_resolved}）</span></div>
+    </div>
+    ${tomorrowIsRef ? `<div class="stat-note">今日此股沒有觸發任何短線技術訊號，「明日預測」顯示的是對照組（單純延續今日漲跌方向）的參考猜測，不是系統判斷——不會計入上面「本股系統訊號命中率」，另外累計在下方「預測命中率追蹤」的對照組數字裡${bt&&bt.total_resolved?`（此股對照組目前 ${bt.total_resolved} 筆、命中率 ${bt.hit_rate_pct}%）`:''}。</div>` : ''}
+  `;
+  const rows = (st.recent||[]).map(p=>`
+    <div class="fa-row ${p.hit?'':'weak'}">
+      <span class="mono">${p.resolved_date}</span>
+      <span class="mono">${p.predicted_direction==='up'?'預測↑':'預測↓'}</span>
+      <span class="mono">${p.actual_direction==='up'?'實際↑':p.actual_direction==='down'?'實際↓':'持平'}</span>
+      <span class="mono ${p.actual_return_pct>=0?'pos':'neg'}">${p.actual_return_pct>=0?'+':''}${p.actual_return_pct}%</span>
+      <span class="mono ${p.hit?'pos':'neg'}">${p.hit?'命中':'未中'}</span>
+    </div>
+  `).join('');
+  return `
+    <div>
+      <div class="section-title">短線預測追蹤（下一個交易日方向）</div>
+      ${statusHtml}
+      ${rows ? `
+        <div class="fa-table">
+          <div class="fa-row fa-head"><span>驗證日</span><span>預測</span><span>實際</span><span>報酬</span><span>結果</span></div>
+          ${rows}
+        </div>
+      ` : `<div class="stat-note">此股票目前還沒有已驗證的系統短線訊號${bt&&bt.total_resolved?`（對照組已累積 ${bt.total_resolved} 筆、命中率 ${bt.hit_rate_pct}%，僅供參考）`:''}，下一個交易日收盤後才會開始回頭驗證。</div>`}
+    </div>
+  `;
+}
+
+function earningsCell(dateStr){
+  if(!dateStr) return '—';
+  const d = new Date(dateStr+'T00:00:00');
+  const daysAway = Math.round((d - new Date())/86400000);
+  if(daysAway < 0) return dateStr;
+  if(daysAway <= 7) return `${dateStr}　<span class="pill neutral" style="padding:1px 7px;font-size:10.5px">${daysAway} 天後</span>`;
+  return dateStr;
+}
+
+function sparkPath(series, w, h){
+  const closes = series.map(p=>p.close);
+  const min = Math.min(...closes), max = Math.max(...closes);
+  const span = (max-min)||1;
+  return closes.map((c,i)=>{
+    const x = (i/(closes.length-1))*w;
+    const y = h - ((c-min)/span)*h;
+    return (i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);
+  }).join(' ');
+}
+
+function dayChangePct(d){
+  const s = d.series;
+  if(s.length<2) return null;
+  const last = s[s.length-1].close, prev = s[s.length-2].close;
+  return (last/prev-1)*100;
+}
+
+function buildRecommendationList(elId, picks){
+  const el = document.getElementById(elId);
+  el.innerHTML = '';
+  if(!picks || !picks.length){
+    el.innerHTML = '<div class="reco-empty">目前沒有訊號分數達門檻的候選股票</div>';
+    return;
+  }
+  picks.forEach(p=>{
+    const card = document.createElement('button');
+    card.className = 'reco-card';
+    card.dataset.ticker = p.ticker;
+    card.innerHTML = `
+      <div class="row1">
+        <span class="t">${p.ticker}</span>
+        <span class="px">${fmtNum(p.price,2)} ${p.currency}</span>
+        <span class="pill bull">+${p.score}</span>
+      </div>
+      ${p.strong_horizons && p.strong_horizons.length ? `<div class="reason">適合：${p.strong_horizons.map(h=>HORIZON_NAMES[h]).join('／')}</div>` : ''}
+      ${p.top_reasons && p.top_reasons.length ? `<div class="reason">${p.top_reasons.map(r=>r.text).join('；')}</div>` : ''}
+      ${p.risk ? `<div class="reason mono">參考停損 ${fmtNum(p.risk.stop_loss,2)}　參考停利 ${fmtNum(p.risk.take_profit,2)}</div>` : ''}
+    `;
+    card.addEventListener('click', ()=> selectTicker(p.ticker, true));
+    el.appendChild(card);
+  });
+}
+
+function buildRecommendations(){
+  buildRecommendationList('recoUs', RECOMMENDATIONS.us);
+  buildRecommendationList('recoHk', RECOMMENDATIONS.hk);
+}
+
+function buildHoldings(){
+  const el = document.getElementById('holdings');
+  document.getElementById('holdingsCount').textContent = `（${HOLDINGS.length}）`;
+  el.innerHTML = '';
+  HOLDINGS.forEach(ticker=>{
+    const d = DATA[ticker];
+    const last60 = d.series.slice(-60);
+    const path = sparkPath(last60, 200, 36);
+    const trendColor = last60[last60.length-1].close >= last60[0].close ? 'var(--bull)' : 'var(--bear)';
+    const p = d.position;
+    const btn = document.createElement('button');
+    btn.className = 'tcard';
+    btn.dataset.ticker = ticker;
+    btn.innerHTML = `
+      <div class="row1">
+        <span class="ticker">${ticker}</span>
+        <span class="exch">${d.meta.exchange}</span>
+      </div>
+      <div><span class="price">${fmtNum(d.meta.price,2)}</span><span class="cur">${d.meta.currency}</span></div>
+      ${p ? `<div class="pnl ${p.unrealized_pct>=0?'pos':'neg'}">${p.shares} 股　損益 ${fmtPct(p.unrealized_pct)}（${p.unrealized_abs>=0?'+':''}${fmtNum(p.unrealized_abs,0)}）</div>` : ''}
+      <svg class="spark" viewBox="0 0 200 36" preserveAspectRatio="none"><path d="${path}" fill="none" stroke="${trendColor}" stroke-width="2"/></svg>
+      <div class="stk-line"><span>短線 預／實／明</span>${stkTrackHtml(ticker)}</div>
+      <span class="pill ${pillClass(d.signal.label)}">${d.signal.label}　score ${d.signal.score>0?'+':''}${d.signal.score}</span>
+    `;
+    btn.addEventListener('click', ()=> selectTicker(ticker, true));
+    el.appendChild(btn);
+  });
+}
+
+function buildWatchlistTable(){
+  const el = document.getElementById('watchlistTable');
+  const list = currentMarket === 'hk' ? WATCHLIST_HK : WATCHLIST_US;
+  document.getElementById('watchlistCount').textContent = `（${list.length}）`;
+  const sorted = [...list].sort((a,b)=> DATA[b].signal.score - DATA[a].signal.score);
+  el.innerHTML = `<div class="wl-head-row"><span>代碼</span><span>名稱</span><span style="text-align:right">價格</span><span style="text-align:right">當日</span><span style="text-align:center" title="短線：本日預測 › 本日實際 › 明日預測">短線 預／實／明</span><span></span></div>`;
+  sorted.forEach(ticker=>{
+    const d = DATA[ticker];
+    const chg = dayChangePct(d);
+    const chgClass = chg===null ? '' : (chg>=0?'pos':'neg');
+    const row = document.createElement('button');
+    row.className = 'wl-row';
+    row.dataset.ticker = ticker;
+    row.innerHTML = `
+      <span class="t">${ticker}</span>
+      <span class="nm">${d.meta.name || ''}</span>
+      <span class="px">${fmtNum(d.meta.price,2)}</span>
+      <span class="chg ${chgClass}">${chg===null?'—':fmtPct(chg)}</span>
+      ${stkTrackHtml(ticker)}
+      <span class="pill ${pillClass(d.signal.label)}">${d.signal.score>0?'+':''}${d.signal.score}</span>
+    `;
+    row.addEventListener('click', ()=> selectTicker(ticker, true));
+    el.appendChild(row);
+  });
+}
+
+let charts = {};
+function destroyCharts(){ Object.values(charts).forEach(c=>c && c.destroy()); charts = {}; }
+
+function renderDetail(ticker){
+  const d = DATA[ticker];
+  const detail = document.getElementById('detail');
+
+  const bt = d.backtest;
+  const risk = d.risk;
+  const rs = d.relative_strength;
+  const btStratClass = bt && bt.strategy_return_pct>=0 ? 'pos':'neg';
+  const btHoldClass = bt && bt.buy_hold_return_pct>=0 ? 'pos':'neg';
+
+  detail.innerHTML = `
+    <div class="detail-head">
+      <div>
+        <h2>${ticker} <span class="exch2">${d.meta.name || ''}</span></h2>
+      </div>
+      <div style="text-align:right">
+        <div class="price2">${fmtNum(d.meta.price,2)} <span style="font-size:12px;color:var(--ink-soft)">${d.meta.currency}</span></div>
+        <div style="font-size:11.5px;color:var(--ink-soft)">52週 ${fmtNum(d.meta.fifty_two_low,2)} – ${fmtNum(d.meta.fifty_two_high,2)}</div>
+      </div>
+    </div>
+
+    <div class="chart-col">
+      <div class="chart-label">股價 ／ 均線 ／ 布林通道</div>
+      <div class="chart-box main"><canvas id="chartMain"></canvas></div>
+      <div class="legend">
+        <span><i style="background:var(--accent)"></i>收盤價</span>
+        <span><i style="background:#9aa79f"></i>SMA20</span>
+        <span><i style="background:#6b8f83"></i>SMA50</span>
+        <span><i style="background:#4b5850;border-top:1px dashed"></i>SMA200</span>
+        <span><i style="background:var(--border)"></i>布林上／下軌</span>
+      </div>
+      <div class="chart-label">RSI (14)</div>
+      <div class="chart-box sub"><canvas id="chartRsi"></canvas></div>
+      <div class="chart-label">MACD (12,26,9)</div>
+      <div class="chart-box sub"><canvas id="chartMacd"></canvas></div>
+      <div class="chart-label">成交量（漲跌上色）／ OBV 能量潮</div>
+      <div class="chart-box sub"><canvas id="chartVol"></canvas></div>
+      <div class="legend">
+        <span><i style="background:var(--bull)"></i>上漲日成交量</span>
+        <span><i style="background:var(--bear)"></i>下跌日成交量</span>
+        <span><i style="background:var(--accent)"></i>OBV（右軸）</span>
+      </div>
+    </div>
+
+    <div class="side-col">
+      ${d.position ? `
+      <div class="pos-card">
+        <div class="section-title" style="margin-bottom:10px">你的部位</div>
+        <div class="pos-grid">
+          <span class="k">持有股數</span><span class="v">${d.position.shares}</span>
+          <span class="k">成本價</span><span class="v">${fmtNum(d.position.cost_basis,2)}</span>
+          <span class="k">市值</span><span class="v">${fmtNum(d.position.market_value,0)}</span>
+          <span class="k">未實現損益</span><span class="v ${d.position.unrealized_pct>=0?'pos':'neg'}">${fmtPct(d.position.unrealized_pct)}（${d.position.unrealized_abs>=0?'+':''}${fmtNum(d.position.unrealized_abs,0)}）</span>
+          ${d.position.dist_to_stop_pct!==null ? `<span class="k">距參考停損</span><span class="v">${fmtPct(d.position.dist_to_stop_pct)}</span>` : ''}
+          ${d.position.dist_to_target_pct!==null ? `<span class="k">距參考停利</span><span class="v">${fmtPct(d.position.dist_to_target_pct)}</span>` : ''}
+        </div>
+        <div class="note">${d.position.note}</div>
+      </div>
+      ` : ''}
+
+      <div class="signal-card">
+        <div class="score-row">
+          <span class="pill ${pillClass(d.signal.label)}">${d.signal.label}</span>
+          <span style="font-size:12px;color:var(--ink-soft)">綜合訊號分數 ${d.signal.score>0?'+':''}${d.signal.score}（-11 偏空 ～ +11 偏多，±2 以上才算偏多／偏空）</span>
+        </div>
+        <div class="horizon-row">
+          ${['short','medium','long'].map(h=>{
+            const hz = d.signal.horizons[h];
+            const hcls = hz.label==='偏多'?'bull':hz.label==='偏空'?'bear':'neutral';
+            return `<div class="horizon-chip ${hcls}"><span class="hname">${HORIZON_NAMES[h]}</span><span class="hlabel">${hz.label}</span><span class="hscore mono">${hz.score>0?'+':''}${hz.score}</span></div>`;
+          }).join('')}
+        </div>
+        ${d.signal.thin_data ? `<div class="thin-data-warn">⚠ 僅 ${d.signal.data_days} 個交易日資料（不足一年），週線趨勢與回測參考價值較低</div>` : ''}
+        ${d.signal.reasons_bull.length ? `<ul class="bull">${d.signal.reasons_bull.map(r=>`<li class="reason-item"><span class="htag">${HORIZON_NAMES[r.horizon]}</span><span>${r.text}</span></li>`).join('')}</ul>` : ''}
+        ${d.signal.reasons_bear.length ? `<ul class="bear">${d.signal.reasons_bear.map(r=>`<li class="reason-item"><span class="htag">${HORIZON_NAMES[r.horizon]}</span><span>${r.text}</span></li>`).join('')}</ul>` : ''}
+        ${(!d.signal.reasons_bull.length && !d.signal.reasons_bear.length) ? '<div class="empty">目前沒有明顯的多空訊號，均線與動能指標偏中性。</div>' : ''}
+        ${rs ? `<div class="rel-strength">近 ${rs.window_days} 日：本股 <b>${fmtPct(rs.stock_return_pct)}</b>　${d.meta.benchmark_name} <b>${fmtPct(rs.benchmark_return_pct)}</b>　相對強弱 <b class="mono" style="color:${rs.relative_pct>=0?'var(--bull)':'var(--bear)'}">${fmtPct(rs.relative_pct)}</b></div>` : ''}
+      </div>
+
+      ${buildShortTrackingBlock(ticker)}
+
+      <div>
+        <div class="section-title">風險參考（ATR 波動度）</div>
+        ${risk ? `
+        <div class="stat-grid">
+          <div class="stat-tile"><div class="label">參考停損</div><div class="value neg">${fmtNum(risk.stop_loss,2)}</div></div>
+          <div class="stat-tile"><div class="label">參考停利</div><div class="value pos">${fmtNum(risk.take_profit,2)}</div></div>
+        </div>
+        <div class="stat-note">ATR14 = ${fmtNum(risk.atr14,2)}（約當股價 ${risk.atr_pct}%）；停損＝現價 − 1.5×ATR，停利＝現價 + 2×ATR，僅供參考，非固定公式。</div>
+        ` : '<div class="empty">資料長度不足以計算 ATR。</div>'}
+      </div>
+
+      <div>
+        <div class="section-title">訊號回測（技術面滾動分數）</div>
+        ${bt ? `
+        <div class="stat-grid">
+          <div class="stat-tile"><div class="label">策略報酬</div><div class="value ${btStratClass}">${fmtPct(bt.strategy_return_pct)}</div></div>
+          <div class="stat-tile"><div class="label">買進持有報酬</div><div class="value ${btHoldClass}">${fmtPct(bt.buy_hold_return_pct)}</div></div>
+          <div class="stat-tile"><div class="label">勝率</div><div class="value">${bt.win_rate_pct}%</div></div>
+          <div class="stat-tile"><div class="label">最大回撤</div><div class="value neg">${bt.max_drawdown_pct}%</div></div>
+        </div>
+        <div class="stat-note">期間 ${bt.period_start} ～ ${bt.period_end}，共 ${bt.num_trades} 筆交易（其中 ${bt.stop_loss_exits} 筆因觸及停損出場）；${bt.rule}</div>
+        ` : '<div class="empty">資料長度不足以回測（需至少約1年歷史資料）。</div>'}
+      </div>
+
+      <div class="stat-note">基本面快照與新聞（需要AI摘要能力）不在這個雲端自動版本裡，請看本機版儀表板。</div>
+    </div>
+  `;
+
+  destroyCharts();
+  const labels = d.series.map(p=>p.date);
+  const ctxMain = document.getElementById('chartMain');
+  const styleColor = getComputedStyle(document.body);
+  const ink = styleColor.getPropertyValue('--ink-soft').trim();
+  const border = styleColor.getPropertyValue('--border').trim();
+  const accent = styleColor.getPropertyValue('--accent').trim();
+
+  Chart.defaults.font.family = "IBM Plex Sans, sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = ink;
+
+  charts.main = new Chart(ctxMain, {
+    type:'line',
+    data:{ labels, datasets:[
+      {label:'收盤價', data:d.series.map(p=>p.close), borderColor:accent, borderWidth:2, pointRadius:0, tension:0.15},
+      {label:'SMA20', data:d.series.map(p=>p.sma20), borderColor:'#9aa79f', borderWidth:1, pointRadius:0, tension:0.15},
+      {label:'SMA50', data:d.series.map(p=>p.sma50), borderColor:'#6b8f83', borderWidth:1, pointRadius:0, tension:0.15},
+      {label:'SMA200', data:d.series.map(p=>p.sma200), borderColor:'#4b5850', borderWidth:1, borderDash:[3,3], pointRadius:0, tension:0.15},
+      {label:'布林上軌', data:d.series.map(p=>p.bb_upper), borderColor:border, borderWidth:1, pointRadius:0, tension:0.15},
+      {label:'布林下軌', data:d.series.map(p=>p.bb_lower), borderColor:border, borderWidth:1, pointRadius:0, tension:0.15},
+    ]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index', intersect:false},
+      plugins:{legend:{display:false}, tooltip:{titleFont:{family:'IBM Plex Mono'}, bodyFont:{family:'IBM Plex Mono'}}},
+      scales:{
+        x:{ticks:{maxTicksLimit:8, color:ink}, grid:{display:false}},
+        y:{ticks:{color:ink, font:{family:'IBM Plex Mono'}}, grid:{color:border}}
+      }
+    }
+  });
+
+  charts.rsi = new Chart(document.getElementById('chartRsi'), {
+    type:'line',
+    data:{ labels, datasets:[
+      {label:'RSI14', data:d.series.map(p=>p.rsi14), borderColor:accent, borderWidth:1.5, pointRadius:0, tension:0.15}
+    ]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{display:false}, grid:{display:false}},
+        y:{min:0, max:100, ticks:{stepSize:50, color:ink, font:{family:'IBM Plex Mono'}}, grid:{color:border}}
+      }
+    },
+    plugins:[{
+      id:'rsiBands',
+      afterDraw(chart){
+        const {ctx, chartArea, scales} = chart;
+        const cs = getComputedStyle(document.body);
+        const bearColor = cs.getPropertyValue('--bear').trim();
+        const bullColor = cs.getPropertyValue('--bull').trim();
+        ctx.save();
+        ctx.setLineDash([2,3]); ctx.lineWidth = 1;
+        [[70,bearColor],[30,bullColor]].forEach(([v,color])=>{
+          const y = scales.y.getPixelForValue(v);
+          ctx.strokeStyle = color;
+          ctx.beginPath(); ctx.moveTo(chartArea.left,y); ctx.lineTo(chartArea.right,y); ctx.stroke();
+        });
+        ctx.restore();
+      }
+    }]
+  });
+
+  charts.macd = new Chart(document.getElementById('chartMacd'), {
+    type:'bar',
+    data:{ labels, datasets:[
+      {type:'bar', label:'柱狀', data:d.series.map(p=>p.macd_hist), backgroundColor:d.series.map(p=> (p.macd_hist||0)>=0 ? getComputedStyle(document.body).getPropertyValue('--bull') : getComputedStyle(document.body).getPropertyValue('--bear')), barPercentage:1, categoryPercentage:1},
+      {type:'line', label:'MACD', data:d.series.map(p=>p.macd), borderColor:accent, borderWidth:1.3, pointRadius:0, tension:0.15},
+      {type:'line', label:'訊號線', data:d.series.map(p=>p.macd_signal), borderColor:'#9aa79f', borderWidth:1.3, pointRadius:0, tension:0.15},
+    ]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{display:false}, grid:{display:false}},
+        y:{ticks:{color:ink, font:{family:'IBM Plex Mono'}}, grid:{color:border}}
+      }
+    }
+  });
+
+  const bullColor = getComputedStyle(document.body).getPropertyValue('--bull');
+  const bearColor = getComputedStyle(document.body).getPropertyValue('--bear');
+  charts.vol = new Chart(document.getElementById('chartVol'), {
+    data:{ labels, datasets:[
+      {type:'bar', label:'成交量', data:d.series.map(p=>p.volume), backgroundColor:d.series.map((p,i)=> i>0 && p.close>=d.series[i-1].close ? bullColor : bearColor), barPercentage:1, categoryPercentage:1, yAxisID:'yVol'},
+      {type:'line', label:'OBV', data:d.series.map(p=>p.obv), borderColor:accent, borderWidth:1.3, pointRadius:0, tension:0.15, yAxisID:'yObv'},
+    ]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{display:false}, grid:{display:false}},
+        yVol:{position:'left', ticks:{display:false}, grid:{color:border}},
+        yObv:{position:'right', ticks:{display:false}, grid:{display:false}}
+      }
+    }
+  });
+}
+
+function selectTicker(ticker, scroll){
+  document.querySelectorAll('.tcard, .wl-row').forEach(c=>c.classList.toggle('active', c.dataset.ticker===ticker));
+  renderDetail(ticker);
+  if(scroll) document.getElementById('detail').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function setMarketTab(market){
+  currentMarket = market;
+  document.querySelectorAll('#marketTabs button').forEach(b=>b.classList.toggle('active', b.dataset.market===market));
+  buildWatchlistTable();
+}
+
+document.querySelectorAll('#marketTabs button').forEach(b=>{
+  b.addEventListener('click', ()=> setMarketTab(b.dataset.market));
+});
+
+function buildFactorAccuracy(){
+  const el = document.getElementById('factorAccuracyBody');
+  if(!FACTOR_ACCURACY || !FACTOR_ACCURACY.length){ el.innerHTML = '<div class="reco-empty">尚無足夠歷史資料可分析</div>'; return; }
+  const rowsHtml = FACTOR_ACCURACY.map(f=>`
+    <div class="fa-row ${f.weak?'weak':''}">
+      <span>${f.name}</span>
+      <span class="mono">${HORIZON_NAMES[f.horizon]}／${f.horizon_days}日</span>
+      <span class="mono">${f.events.toLocaleString()}</span>
+      <span class="mono">${f.hit_rate_pct}%</span>
+      <span class="mono ${f.edge_pct>=0?'pos':'neg'}">${f.edge_pct>=0?'+':''}${f.edge_pct}%</span>
+    </div>
+  `).join('');
+  const weakCount = FACTOR_ACCURACY.filter(f=>f.weak).length;
+  el.innerHTML = `
+    ${weakCount>0 ? `<div class="thin-data-warn">⚠ ${weakCount}／${FACTOR_ACCURACY.length} 個技術因子的「勝率優勢」在近期這段（多為多頭）測試期間是負的——訊號發生後的報酬，平均反而比不管三七二十一直接持有還低。這通常代表：等訊號確認才進場，在單邊噴出的多頭市場中天生會慢半拍；這些因子的價值目前看來更偏向「控制下跌風險」（例如減少最大回撤），而不是「提高報酬」，請不要照單全收。</div>` : ''}
+    <div class="fa-table">
+      <div class="fa-row fa-head"><span>因子</span><span>對應尺度</span><span>樣本數</span><span>命中率</span><span>報酬優勢</span></div>
+      ${rowsHtml}
+    </div>
+  `;
+}
+
+function buildPredictionTracking(){
+  const el = document.getElementById('predictionBody');
+  const pa = PREDICTION_ACCURACY;
+  if(!pa){ el.innerHTML = '<div class="reco-empty">尚未開始累積預測資料</div>'; return; }
+
+  const horizonCards = pa.by_horizon.map(h=>{
+    const has = h.n > 0;
+    const cls = !has ? 'neutral' : (h.hit_rate_pct>=55?'bull':h.hit_rate_pct<=45?'bear':'neutral');
+    return `<div class="horizon-chip ${cls}" style="flex-direction:column; align-items:flex-start; gap:2px; padding:10px 14px;">
+      <span class="hname">${h.label}</span>
+      <span class="hlabel" style="font-size:16px">${has ? h.hit_rate_pct+'%' : '累積中'}</span>
+      <span class="hscore mono">已驗證 ${h.n} 筆${pa.total_pending?`，待驗證中`:''}</span>
+    </div>`;
+  }).join('');
+
+  const ba = BASELINE_ACCURACY;
+  const baselineCard = ba ? `<div class="horizon-chip neutral" style="flex-direction:column; align-items:flex-start; gap:2px; padding:10px 14px; border-style:dashed;">
+    <span class="hname">對照組（純延續前日方向）</span>
+    <span class="hlabel" style="font-size:16px">${ba.n ? ba.hit_rate_pct+'%' : '累積中'}</span>
+    <span class="hscore mono">已驗證 ${ba.n} 筆</span>
+  </div>` : '';
+  const baselineByMarket = (ba && ba.by_market && ba.by_market.length) ? ba.by_market.map(m=>`${m.market==='US'?'美股':'港股'} ${m.hit_rate_pct}%（${m.n}筆）`).join('　') : '';
+
+  const factorRows = (pa.by_factor||[]).map(f=>`
+    <div class="fa-row cols4 ${f.hit_rate_pct<50?'weak':''}">
+      <span>${HORIZON_NAMES[f.horizon]}</span>
+      <span>${f.name}</span>
+      <span class="mono">${f.n}</span>
+      <span class="mono">${f.hit_rate_pct}%</span>
+    </div>
+  `).join('');
+
+  const recentRows = (pa.recent||[]).slice(0,10).map(p=>`
+    <div class="fa-row ${p.hit?'':'weak'}">
+      <span class="mono">${p.ticker}</span>
+      <span>${HORIZON_NAMES[p.horizon]}</span>
+      <span class="mono">${p.predicted_direction==='up'?'預測↑':'預測↓'}</span>
+      <span class="mono">${p.actual_direction==='up'?'實際↑':p.actual_direction==='down'?'實際↓':'持平'}（${p.actual_return_pct>=0?'+':''}${p.actual_return_pct}%）</span>
+      <span class="mono ${p.hit?'pos':'neg'}">${p.hit?'命中':'未中'}</span>
+    </div>
+  `).join('');
+
+  el.innerHTML = `
+    <div class="horizon-row" style="margin-bottom:6px">${horizonCards}${baselineCard}</div>
+    <div class="stat-note" style="margin-bottom:14px">對照組不做任何技術判斷或形態辨識，純粹機械式延續前一天的實際漲跌結果去猜明天，用來檢驗「短線」欄位的命中率是不是真的贏過市場慣性——如果兩者長期打平，代表短線技術訊號目前還沒有證明出超越瞎猜的價值。${baselineByMarket?`　（${baselineByMarket}）`:''}</div>
+    ${pa.by_factor && pa.by_factor.length ? `
+      <div class="section-title" style="margin-bottom:6px">各因子在「實際預測」中的命中率（樣本數≥5才會列出）</div>
+      <div class="fa-table" style="margin-bottom:16px">
+        <div class="fa-row fa-head cols4"><span>尺度</span><span>因子</span><span>樣本數</span><span>命中率</span></div>
+        ${factorRows}
+      </div>
+    ` : '<div class="stat-note" style="margin-bottom:16px">因子層級的命中率統計需要更多已驗證的樣本，目前還在累積中。</div>'}
+    ${recentRows ? `
+      <div class="section-title" style="margin-bottom:6px">最近驗證的預測</div>
+      <div class="fa-table">
+        <div class="fa-row fa-head"><span>代碼</span><span>尺度</span><span>預測</span><span>實際</span><span>結果</span></div>
+        ${recentRows}
+      </div>
+    ` : ''}
+  `;
+}
+
+buildRecommendations();
+buildHoldings();
+buildFactorAccuracy();
+buildPredictionTracking();
+setMarketTab('us');
+selectTicker(ORDER[0], false);
+</script>

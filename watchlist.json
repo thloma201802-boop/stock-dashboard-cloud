@@ -1,0 +1,7 @@
+{
+  "holdings": ["MSFT", "NOK", "SPCX", "1810.HK", "1898.HK"],
+  "watchlist_us": ["HPE", "DELL", "NTAP", "HPQ", "SMCI", "HIMX", "U", "INTC", "GOOGL", "AAPL", "TSM", "BABA", "CVX", "META", "KO", "TSLA", "JD", "NVDA", "ADM", "MU", "SNOW", "FUTU", "CRWD", "CYN", "DQ", "NET", "UNH", "RBRK"],
+  "watchlist_hk": ["3690.HK", "0968.HK", "6060.HK", "0027.HK", "0590.HK", "3988.HK", "2097.HK", "1658.HK", "0700.HK", "9988.HK", "0020.HK", "1211.HK", "2618.HK", "9992.HK", "1448.HK", "9888.HK", "2282.HK", "1928.HK", "9633.HK", "1299.HK", "1830.HK", "0868.HK", "0981.HK", "0285.HK", "2269.HK", "1919.HK", "0388.HK", "1347.HK", "2359.HK", "1024.HK", "6098.HK", "3750.HK", "0883.HK", "1772.HK", "3319.HK", "1799.HK", "1177.HK", "9696.HK"],
+  "benchmark_us": "^GSPC",
+  "benchmark_hk": "^HSI"
+}
