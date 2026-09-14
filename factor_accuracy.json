@@ -1,0 +1,122 @@
+[
+  {
+    "factor": "macd",
+    "name": "MACD交叉",
+    "horizon": "short",
+    "horizon_days": 10,
+    "events": 2749,
+    "hit_rate_pct": 49.7,
+    "avg_return_when_fired_pct": 0.45,
+    "avg_return_baseline_pct": 1.23,
+    "edge_pct": -0.78,
+    "weak": true
+  },
+  {
+    "factor": "volume",
+    "name": "成交量confirm",
+    "horizon": "short",
+    "horizon_days": 10,
+    "events": 5521,
+    "hit_rate_pct": 49.8,
+    "avg_return_when_fired_pct": 0.32,
+    "avg_return_baseline_pct": 1.23,
+    "edge_pct": -0.91,
+    "weak": true
+  },
+  {
+    "factor": "weekly_trend",
+    "name": "週線趨勢",
+    "horizon": "medium",
+    "horizon_days": 20,
+    "events": 19748,
+    "hit_rate_pct": 51.9,
+    "avg_return_when_fired_pct": 1.19,
+    "avg_return_baseline_pct": 2.18,
+    "edge_pct": -0.98,
+    "weak": true
+  },
+  {
+    "factor": "sma_trend",
+    "name": "均線多空排列",
+    "horizon": "medium",
+    "horizon_days": 20,
+    "events": 18996,
+    "hit_rate_pct": 51.9,
+    "avg_return_when_fired_pct": 1.16,
+    "avg_return_baseline_pct": 2.18,
+    "edge_pct": -1.02,
+    "weak": true
+  },
+  {
+    "factor": "sma_cross",
+    "name": "均線黃金/死亡交叉",
+    "horizon": "medium",
+    "horizon_days": 20,
+    "events": 647,
+    "hit_rate_pct": 52.2,
+    "avg_return_when_fired_pct": 0.96,
+    "avg_return_baseline_pct": 2.18,
+    "edge_pct": -1.21,
+    "weak": true
+  },
+  {
+    "factor": "bollinger",
+    "name": "布林通道",
+    "horizon": "short",
+    "horizon_days": 10,
+    "events": 3416,
+    "hit_rate_pct": 51.7,
+    "avg_return_when_fired_pct": -0.05,
+    "avg_return_baseline_pct": 1.23,
+    "edge_pct": -1.28,
+    "weak": true
+  },
+  {
+    "factor": "candlestick",
+    "name": "K線形態",
+    "horizon": "short",
+    "horizon_days": 10,
+    "events": 3327,
+    "hit_rate_pct": 48.7,
+    "avg_return_when_fired_pct": -0.25,
+    "avg_return_baseline_pct": 1.23,
+    "edge_pct": -1.48,
+    "weak": true
+  },
+  {
+    "factor": "relative_strength",
+    "name": "相對大盤強弱",
+    "horizon": "medium",
+    "horizon_days": 20,
+    "events": 22517,
+    "hit_rate_pct": 51.4,
+    "avg_return_when_fired_pct": 0.67,
+    "avg_return_baseline_pct": 2.18,
+    "edge_pct": -1.51,
+    "weak": true
+  },
+  {
+    "factor": "rsi",
+    "name": "RSI超買超賣",
+    "horizon": "short",
+    "horizon_days": 10,
+    "events": 3570,
+    "hit_rate_pct": 49.0,
+    "avg_return_when_fired_pct": -0.89,
+    "avg_return_baseline_pct": 1.23,
+    "edge_pct": -2.12,
+    "weak": true
+  },
+  {
+    "factor": "divergence",
+    "name": "RSI背離",
+    "horizon": "medium",
+    "horizon_days": 20,
+    "events": 6874,
+    "hit_rate_pct": 48.4,
+    "avg_return_when_fired_pct": -0.83,
+    "avg_return_baseline_pct": 2.18,
+    "edge_pct": -3.01,
+    "weak": true
+  }
+]

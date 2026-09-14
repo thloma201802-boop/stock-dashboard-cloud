@@ -1,0 +1,25 @@
+{
+  "by_horizon": [
+    {
+      "horizon": "short",
+      "label": "短線（下一個交易日）",
+      "n": 0,
+      "hit_rate_pct": null
+    },
+    {
+      "horizon": "medium",
+      "label": "中線（20個交易日≈1個月）",
+      "n": 0,
+      "hit_rate_pct": null
+    },
+    {
+      "horizon": "long",
+      "label": "長線（60個交易日≈3個月，為了能實際驗證命中率而非真的等12個月分析師目標價的期限）",
+      "n": 0,
+      "hit_rate_pct": null
+    }
+  ],
+  "by_factor": [],
+  "recent": [],
+  "total_pending": 84
+}
