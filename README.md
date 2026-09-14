@@ -6,12 +6,16 @@
 
 **這個版本包含**：均線、RSI、MACD、布林通道、成交量、K線形態（吞噬/槌子/上吊/流星）、週線趨勢、RSI 背離、相對大盤強弱等純技術指標組成的多空訊號、訊號回測、系統校準報告（回頭驗證各因子歷史準不準）、短/中/長線方向預測與命中率追蹤，以及一個不做任何技術判斷、純粹延續前一天漲跌的「對照組」用來檢驗訊號是否真的優於瞎猜。
 
+**即時報價**：另外有一個獨立的排程（`live-quotes.yml`），美股/港股盤中每15分鐘更新一次目前價格與當日漲跌幅（純資訊顯示，不影響任何技術訊號或預測邏輯，收盤價分析永遠只用真正收盤後的資料）。
+
 ## 檔案
 
 - `fetch_analyze.py` — 抓取價格資料（Yahoo Finance）、計算所有指標與訊號、跑回測、記錄預測，輸出 JSON。
+- `live_quotes.py` — 盤中即時價格/當日漲跌幅，獨立於上面的收盤分析。
 - `splice.py` — 把 JSON 資料灌進 `template.html`，輸出 `dist/index.html`。
 - `watchlist.json` / `sectors.json` — 追蹤的股票清單與類股標籤（不含個人部位資料）。
-- `.github/workflows/update.yml` — 排程設定。
+- `.github/workflows/update.yml` — 每天兩次的完整技術面更新排程。
+- `.github/workflows/live-quotes.yml` — 盤中每15分鐘的即時報價排程。
 
 ## 免責聲明
 

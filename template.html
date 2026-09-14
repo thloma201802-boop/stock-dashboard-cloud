@@ -68,6 +68,9 @@ header.top .meta .ts{font-family:"IBM Plex Mono",monospace; color:var(--accent);
 .tcard .exch{font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em;}
 .tcard .price{font-family:"IBM Plex Mono",monospace; font-size:22px; font-weight:600;}
 .tcard .cur{font-size:11px; color:var(--ink-soft); margin-left:4px;}
+.tcard .chg{font-family:"IBM Plex Mono",monospace; font-size:12.5px; margin-left:8px; font-weight:600;}
+.tcard .chg.pos{color:var(--bull);}
+.tcard .chg.neg{color:var(--bear);}
 .pill{
   display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:99px;
   font-size:12px; font-weight:600; width:fit-content;
@@ -264,6 +267,7 @@ footer b{color:var(--ink);}
     </div>
     <div class="meta">
       資料時間<br><span class="ts" id="asOf">—</span>
+      <div style="margin-top:6px">即時報價<br><span class="ts" id="liveAsOf">尚未取得（盤中才會更新）</span></div>
     </div>
   </header>
 
@@ -473,6 +477,8 @@ function buildHoldings(){
     const path = sparkPath(last60, 200, 36);
     const trendColor = last60[last60.length-1].close >= last60[0].close ? 'var(--bull)' : 'var(--bear)';
     const p = d.position;
+    const chg = dayChangePct(d);
+    const chgClass = chg===null ? '' : (chg>=0?'pos':'neg');
     const btn = document.createElement('button');
     btn.className = 'tcard';
     btn.dataset.ticker = ticker;
@@ -481,7 +487,7 @@ function buildHoldings(){
         <span class="ticker">${ticker}</span>
         <span class="exch">${d.meta.exchange}</span>
       </div>
-      <div><span class="price">${fmtNum(d.meta.price,2)}</span><span class="cur">${d.meta.currency}</span></div>
+      <div><span class="price">${fmtNum(d.meta.price,2)}</span><span class="cur">${d.meta.currency}</span><span class="chg ${chgClass}">${chg===null?'':fmtPct(chg)}</span></div>
       ${p ? `<div class="pnl ${p.unrealized_pct>=0?'pos':'neg'}">${p.shares} 股　損益 ${fmtPct(p.unrealized_pct)}（${p.unrealized_abs>=0?'+':''}${fmtNum(p.unrealized_abs,0)}）</div>` : ''}
       <svg class="spark" viewBox="0 0 200 36" preserveAspectRatio="none"><path d="${path}" fill="none" stroke="${trendColor}" stroke-width="2"/></svg>
       <div class="stk-line"><span>短線 預／實／明</span>${stkTrackHtml(ticker)}</div>
@@ -837,4 +843,40 @@ buildFactorAccuracy();
 buildPredictionTracking();
 setMarketTab('us');
 selectTicker(ORDER[0], false);
+
+let liveQuotes = null;
+async function loadLiveQuotes(){
+  try{
+    const res = await fetch('./live_quotes.json', {cache: 'no-store'});
+    if(!res.ok) return;
+    liveQuotes = await res.json();
+    applyLiveQuotes();
+  }catch(e){ /* offline / not deployed yet — keep the baked-in end-of-day values */ }
+}
+function applyLiveQuotes(){
+  if(!liveQuotes || !liveQuotes.quotes) return;
+  document.querySelectorAll('[data-ticker]').forEach(el=>{
+    const q = liveQuotes.quotes[el.dataset.ticker];
+    if(!q || q.price==null) return;
+    const priceEl = el.querySelector('.px, .price');
+    const chgEl = el.querySelector('.chg');
+    if(priceEl) priceEl.textContent = fmtNum(q.price, 2);
+    if(chgEl && q.change_pct!=null){
+      chgEl.textContent = fmtPct(q.change_pct);
+      chgEl.classList.remove('pos','neg');
+      chgEl.classList.add(q.change_pct>=0?'pos':'neg');
+    }
+  });
+  const tsEl = document.getElementById('liveAsOf');
+  if(tsEl){
+    if(liveQuotes.markets_open && liveQuotes.markets_open.length){
+      const t = new Date(liveQuotes.generated_at);
+      tsEl.textContent = `${t.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'})}（${liveQuotes.markets_open.map(m=>m==='US'?'美股':'港股').join('／')}盤中）`;
+    } else {
+      tsEl.textContent = '目前不在美股／港股交易時段';
+    }
+  }
+}
+loadLiveQuotes();
+setInterval(loadLiveQuotes, 5*60*1000);
 </script>

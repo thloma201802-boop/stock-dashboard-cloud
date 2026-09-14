@@ -1,0 +1,46 @@
+name: Live quotes refresh
+
+on:
+  schedule:
+    - cron: '*/15 0-21 * * 1-5'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install pandas numpy
+
+      - name: Fetch live quotes (no-op outside market hours)
+        run: python live_quotes.py
+
+      - name: Rebuild page from existing analysis data
+        run: python splice.py
+
+      - name: Include live quotes in the deployed page
+        run: cp live_quotes.json dist/live_quotes.json
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - uses: actions/deploy-pages@v4
+        id: deployment

@@ -36,6 +36,12 @@ jobs:
       - name: Build dashboard page
         run: python splice.py
 
+      - name: Fetch live quotes (no-op outside market hours)
+        run: python live_quotes.py
+
+      - name: Include live quotes in the deployed page
+        run: cp live_quotes.json dist/live_quotes.json
+
       - name: Commit updated state files
         run: |
           git config user.name "github-actions[bot]"
