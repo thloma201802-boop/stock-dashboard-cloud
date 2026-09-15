@@ -3,8 +3,8 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 0,
-      "hit_rate_pct": null
+      "n": 5,
+      "hit_rate_pct": 60.0
     },
     {
       "horizon": "medium",
@@ -20,6 +20,94 @@
     }
   ],
   "by_factor": [],
-  "recent": [],
-  "total_pending": 84
+  "recent": [
+    {
+      "ticker": "3988.HK",
+      "horizon": "short",
+      "made_date": "2026-09-14",
+      "made_price": 6.085,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "RSI14 為 70.9，處於超買區"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-09-15",
+      "resolved_price": 6.07,
+      "actual_return_pct": -0.25,
+      "actual_direction": "down",
+      "hit": true
+    },
+    {
+      "ticker": "0020.HK",
+      "horizon": "short",
+      "made_date": "2026-09-14",
+      "made_price": 1.265,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "股價跌破布林通道下軌，短線可能超跌"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-09-15",
+      "resolved_price": 1.275,
+      "actual_return_pct": 0.79,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "1928.HK",
+      "horizon": "short",
+      "made_date": "2026-09-14",
+      "made_price": 13.0,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "RSI14 為 29.3，處於超賣區",
+        "股價跌破布林通道下軌，短線可能超跌",
+        "價格下跌且成交量放大、OBV 走弱，賣壓有量能支撐"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-09-15",
+      "resolved_price": 13.0,
+      "actual_return_pct": 0.0,
+      "actual_direction": "flat",
+      "hit": false
+    },
+    {
+      "ticker": "2359.HK",
+      "horizon": "short",
+      "made_date": "2026-09-14",
+      "made_price": 197.9,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "出現「看漲吞噬」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-09-15",
+      "resolved_price": 200.0,
+      "actual_return_pct": 1.06,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "3750.HK",
+      "horizon": "short",
+      "made_date": "2026-09-14",
+      "made_price": 549.0,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "RSI14 為 29.6，處於超賣區"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-09-15",
+      "resolved_price": 548.0,
+      "actual_return_pct": -0.18,
+      "actual_direction": "down",
+      "hit": false
+    }
+  ],
+  "total_pending": 93
 }

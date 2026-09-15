@@ -1,6 +1,12 @@
 {
-  "n": 0,
-  "hits": 0,
-  "hit_rate_pct": null,
-  "by_market": []
+  "n": 27,
+  "hits": 12,
+  "hit_rate_pct": 44.4,
+  "by_market": [
+    {
+      "market": "HK",
+      "n": 27,
+      "hit_rate_pct": 44.4
+    }
+  ]
 }
