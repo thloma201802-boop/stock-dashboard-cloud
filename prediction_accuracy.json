@@ -3,8 +3,8 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 363,
-      "hit_rate_pct": 48.5
+      "n": 376,
+      "hit_rate_pct": 48.4
     },
     {
       "horizon": "medium",
@@ -24,36 +24,36 @@
       "horizon": "short",
       "factor": "candlestick",
       "name": "K線形態",
-      "n": 98,
-      "hit_rate_pct": 43.9
+      "n": 100,
+      "hit_rate_pct": 44.0
     },
     {
       "horizon": "short",
       "factor": "rsi",
       "name": "RSI超買超賣",
-      "n": 99,
-      "hit_rate_pct": 44.4
-    },
-    {
-      "horizon": "short",
-      "factor": "volume",
-      "name": "成交量confirm",
-      "n": 82,
-      "hit_rate_pct": 50.0
+      "n": 101,
+      "hit_rate_pct": 44.6
     },
     {
       "horizon": "short",
       "factor": "macd",
       "name": "MACD交叉",
-      "n": 72,
-      "hit_rate_pct": 52.8
+      "n": 76,
+      "hit_rate_pct": 50.0
+    },
+    {
+      "horizon": "short",
+      "factor": "volume",
+      "name": "成交量confirm",
+      "n": 84,
+      "hit_rate_pct": 50.0
     },
     {
       "horizon": "short",
       "factor": "bollinger",
       "name": "布林通道",
-      "n": 75,
-      "hit_rate_pct": 54.7
+      "n": 81,
+      "hit_rate_pct": 55.6
     }
   ],
   "recent": [
@@ -384,22 +384,22 @@
       "hit": true
     },
     {
-      "ticker": "0700.HK",
+      "ticker": "SPCX",
       "horizon": "short",
       "made_date": "2026-10-02",
-      "made_price": 421.2,
+      "made_price": 157.675,
       "predicted_direction": "down",
       "horizon_score": -1,
       "reasons": [
-        "MACD 剛向下穿越訊號線"
+        "股價突破布林通道上軌，短線可能過熱"
       ],
       "status": "resolved",
       "resolved_date": "2026-10-05",
-      "resolved_price": 417.0,
-      "actual_return_pct": -1.0,
-      "actual_direction": "down",
-      "hit": true
+      "resolved_price": 168.43,
+      "actual_return_pct": 6.82,
+      "actual_direction": "up",
+      "hit": false
     }
   ],
-  "total_pending": 101
+  "total_pending": 100
 }
