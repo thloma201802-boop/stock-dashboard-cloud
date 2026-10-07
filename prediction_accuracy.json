@@ -3,8 +3,8 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 429,
-      "hit_rate_pct": 48.3
+      "n": 448,
+      "hit_rate_pct": 48.4
     },
     {
       "horizon": "medium",
@@ -24,36 +24,36 @@
       "horizon": "short",
       "factor": "candlestick",
       "name": "K線形態",
-      "n": 112,
-      "hit_rate_pct": 42.0
-    },
-    {
-      "horizon": "short",
-      "factor": "rsi",
-      "name": "RSI超買超賣",
-      "n": 124,
-      "hit_rate_pct": 47.6
+      "n": 116,
+      "hit_rate_pct": 42.2
     },
     {
       "horizon": "short",
       "factor": "macd",
       "name": "MACD交叉",
-      "n": 89,
-      "hit_rate_pct": 49.4
+      "n": 93,
+      "hit_rate_pct": 48.4
+    },
+    {
+      "horizon": "short",
+      "factor": "rsi",
+      "name": "RSI超買超賣",
+      "n": 131,
+      "hit_rate_pct": 48.9
     },
     {
       "horizon": "short",
       "factor": "volume",
       "name": "成交量confirm",
-      "n": 86,
-      "hit_rate_pct": 51.2
+      "n": 87,
+      "hit_rate_pct": 50.6
     },
     {
       "horizon": "short",
       "factor": "bollinger",
       "name": "布林通道",
-      "n": 97,
-      "hit_rate_pct": 56.7
+      "n": 103,
+      "hit_rate_pct": 57.3
     }
   ],
   "recent": [
@@ -229,6 +229,24 @@
       "hit": false
     },
     {
+      "ticker": "1830.HK",
+      "horizon": "short",
+      "made_date": "2026-10-06",
+      "made_price": 1.195,
+      "predicted_direction": "up",
+      "horizon_score": 2,
+      "reasons": [
+        "RSI14 為 29.3，處於超賣區",
+        "股價跌破布林通道下軌，短線可能超跌"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-07",
+      "resolved_price": 1.22,
+      "actual_return_pct": 2.09,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
       "ticker": "2269.HK",
       "horizon": "short",
       "made_date": "2026-10-06",
@@ -332,27 +350,27 @@
       "hit": false
     },
     {
-      "ticker": "0868.HK",
+      "ticker": "MSFT",
       "horizon": "short",
       "made_date": "2026-10-06",
-      "made_price": 7.865,
-      "predicted_direction": "up",
-      "horizon_score": 1,
+      "made_price": 532.945,
+      "predicted_direction": "down",
+      "horizon_score": -1,
       "reasons": [
-        "RSI14 為 29.9，處於超賣區"
+        "股價突破布林通道上軌，短線可能過熱"
       ],
       "status": "resolved",
       "resolved_date": "2026-10-07",
-      "resolved_price": 8.09,
-      "actual_return_pct": 2.86,
-      "actual_direction": "up",
+      "resolved_price": 528.465,
+      "actual_return_pct": -0.84,
+      "actual_direction": "down",
       "hit": true
     },
     {
-      "ticker": "0285.HK",
+      "ticker": "NOK",
       "horizon": "short",
       "made_date": "2026-10-06",
-      "made_price": 23.9,
+      "made_price": 10.745,
       "predicted_direction": "up",
       "horizon_score": 1,
       "reasons": [
@@ -360,45 +378,29 @@
       ],
       "status": "resolved",
       "resolved_date": "2026-10-07",
-      "resolved_price": 23.5,
-      "actual_return_pct": -1.67,
+      "resolved_price": 10.635,
+      "actual_return_pct": -1.02,
       "actual_direction": "down",
       "hit": false
     },
     {
-      "ticker": "6098.HK",
+      "ticker": "SPCX",
       "horizon": "short",
       "made_date": "2026-10-06",
-      "made_price": 5.215,
+      "made_price": 173.995,
       "predicted_direction": "down",
-      "horizon_score": -1,
+      "horizon_score": -2,
       "reasons": [
-        "出現「流星線」K線形態，屬於價格行為的反轉訊號"
+        "RSI14 為 71.0，處於超買區",
+        "股價突破布林通道上軌，短線可能過熱"
       ],
       "status": "resolved",
       "resolved_date": "2026-10-07",
-      "resolved_price": 5.195,
-      "actual_return_pct": -0.38,
+      "resolved_price": 169.145,
+      "actual_return_pct": -2.79,
       "actual_direction": "down",
-      "hit": true
-    },
-    {
-      "ticker": "1810.HK",
-      "horizon": "short",
-      "made_date": "2026-10-05",
-      "made_price": 23.9,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "股價跌破布林通道下軌，短線可能超跌"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-06",
-      "resolved_price": 24.06,
-      "actual_return_pct": 0.67,
-      "actual_direction": "up",
       "hit": true
     }
   ],
-  "total_pending": 98
+  "total_pending": 90
 }
