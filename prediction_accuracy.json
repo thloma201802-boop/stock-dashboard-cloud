@@ -3,7 +3,7 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 543,
+      "n": 551,
       "hit_rate_pct": 48.3
     },
     {
@@ -24,36 +24,36 @@
       "horizon": "short",
       "factor": "candlestick",
       "name": "K線形態",
-      "n": 135,
-      "hit_rate_pct": 43.7
-    },
-    {
-      "horizon": "short",
-      "factor": "macd",
-      "name": "MACD交叉",
-      "n": 125,
-      "hit_rate_pct": 45.6
+      "n": 138,
+      "hit_rate_pct": 43.5
     },
     {
       "horizon": "short",
       "factor": "volume",
       "name": "成交量confirm",
-      "n": 107,
-      "hit_rate_pct": 45.8
+      "n": 108,
+      "hit_rate_pct": 45.4
+    },
+    {
+      "horizon": "short",
+      "factor": "macd",
+      "name": "MACD交叉",
+      "n": 126,
+      "hit_rate_pct": 46.0
     },
     {
       "horizon": "short",
       "factor": "rsi",
       "name": "RSI超買超賣",
-      "n": 159,
+      "n": 161,
       "hit_rate_pct": 50.9
     },
     {
       "horizon": "short",
       "factor": "bollinger",
       "name": "布林通道",
-      "n": 122,
-      "hit_rate_pct": 54.1
+      "n": 125,
+      "hit_rate_pct": 53.6
     },
     {
       "horizon": "medium",
@@ -102,6 +102,144 @@
       "actual_return_pct": -0.0,
       "actual_direction": "down",
       "hit": false
+    },
+    {
+      "ticker": "NTAP",
+      "horizon": "short",
+      "made_date": "2026-10-12",
+      "made_price": 237.92,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "RSI14 為 74.9，處於超買區"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 234.815,
+      "actual_return_pct": -1.31,
+      "actual_direction": "down",
+      "hit": true
+    },
+    {
+      "ticker": "NVDA",
+      "horizon": "short",
+      "made_date": "2026-10-12",
+      "made_price": 226.389,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "MACD 剛向下穿越訊號線"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 225.86,
+      "actual_return_pct": -0.23,
+      "actual_direction": "down",
+      "hit": true
+    },
+    {
+      "ticker": "CRWD",
+      "horizon": "short",
+      "made_date": "2026-10-12",
+      "made_price": 263.01,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 263.84,
+      "actual_return_pct": 0.32,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "CYN",
+      "horizon": "short",
+      "made_date": "2026-10-12",
+      "made_price": 0.499,
+      "predicted_direction": "up",
+      "horizon_score": 2,
+      "reasons": [
+        "RSI14 為 22.5，處於超賣區",
+        "股價跌破布林通道下軌，短線可能超跌"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 0.484,
+      "actual_return_pct": -3.05,
+      "actual_direction": "down",
+      "hit": false
+    },
+    {
+      "ticker": "RBRK",
+      "horizon": "short",
+      "made_date": "2026-10-12",
+      "made_price": 120.63,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 119.905,
+      "actual_return_pct": -0.6,
+      "actual_direction": "down",
+      "hit": true
+    },
+    {
+      "ticker": "KO",
+      "horizon": "short",
+      "made_date": "2026-10-12",
+      "made_price": 89.79,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "股價突破布林通道上軌，短線可能過熱"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 90.25,
+      "actual_return_pct": 0.51,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "JD",
+      "horizon": "short",
+      "made_date": "2026-10-12",
+      "made_price": 26.72,
+      "predicted_direction": "down",
+      "horizon_score": -2,
+      "reasons": [
+        "價格下跌且成交量放大、OBV 走弱，賣壓有量能支撐",
+        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 26.75,
+      "actual_return_pct": 0.11,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "SNOW",
+      "horizon": "short",
+      "made_date": "2026-10-12",
+      "made_price": 360.37,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "股價突破布林通道上軌，短線可能過熱"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 358.82,
+      "actual_return_pct": -0.43,
+      "actual_direction": "down",
+      "hit": true
     },
     {
       "ticker": "MSFT",
@@ -315,159 +453,7 @@
       "actual_return_pct": 4.22,
       "actual_direction": "up",
       "hit": true
-    },
-    {
-      "ticker": "GOOGL",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 344.59,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "週線均線也維持多頭排列，日線訊號較不易是單純雜訊",
-        "50日均線在200日均線之上（多頭排列）",
-        "近60日走勢落後大盤 -7.8 個百分點"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 351.8,
-      "actual_return_pct": 2.09,
-      "actual_direction": "up",
-      "hit": true
-    },
-    {
-      "ticker": "AAPL",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 332.89,
-      "predicted_direction": "up",
-      "horizon_score": 3,
-      "reasons": [
-        "週線均線也維持多頭排列，日線訊號較不易是單純雜訊",
-        "50日均線在200日均線之上（多頭排列）",
-        "近60日走勢優於大盤 +9.9 個百分點"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 339.687,
-      "actual_return_pct": 2.04,
-      "actual_direction": "up",
-      "hit": true
-    },
-    {
-      "ticker": "TSM",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 420.0,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "週線均線也維持多頭排列，日線訊號較不易是單純雜訊",
-        "50日均線在200日均線之上（多頭排列）",
-        "近60日走勢落後大盤 -5.4 個百分點"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 446.76,
-      "actual_return_pct": 6.37,
-      "actual_direction": "up",
-      "hit": true
-    },
-    {
-      "ticker": "BABA",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 108.0,
-      "predicted_direction": "down",
-      "horizon_score": -3,
-      "reasons": [
-        "週線均線已轉空頭，日線訊號可能只是短線反彈",
-        "50日均線在200日均線之下（空頭排列）",
-        "20日均線剛向下穿越50日均線（死亡交叉）"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 110.85,
-      "actual_return_pct": 2.64,
-      "actual_direction": "up",
-      "hit": false
-    },
-    {
-      "ticker": "CVX",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 216.76,
-      "predicted_direction": "up",
-      "horizon_score": 3,
-      "reasons": [
-        "週線均線也維持多頭排列，日線訊號較不易是單純雜訊",
-        "50日均線在200日均線之上（多頭排列）",
-        "近60日走勢優於大盤 +19.5 個百分點"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 215.4,
-      "actual_return_pct": -0.63,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "META",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 659.56,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "近60日走勢優於大盤 +13.7 個百分點",
-        "週線均線已轉空頭，日線訊號可能只是短線反彈",
-        "50日均線在200日均線之下（空頭排列）"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 747.568,
-      "actual_return_pct": 13.34,
-      "actual_direction": "up",
-      "hit": false
-    },
-    {
-      "ticker": "KO",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 89.625,
-      "predicted_direction": "up",
-      "horizon_score": 3,
-      "reasons": [
-        "週線均線也維持多頭排列，日線訊號較不易是單純雜訊",
-        "50日均線在200日均線之上（多頭排列）",
-        "近60日走勢優於大盤 +9.6 個百分點"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 89.345,
-      "actual_return_pct": -0.31,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "TSLA",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 360.59,
-      "predicted_direction": "down",
-      "horizon_score": -3,
-      "reasons": [
-        "週線均線已轉空頭，日線訊號可能只是短線反彈",
-        "50日均線在200日均線之下（空頭排列）",
-        "近60日走勢落後大盤 -11.6 個百分點"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 379.11,
-      "actual_return_pct": 5.14,
-      "actual_direction": "up",
-      "hit": false
     }
   ],
-  "total_pending": 104
+  "total_pending": 105
 }
