@@ -3,7 +3,7 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 542,
+      "n": 543,
       "hit_rate_pct": 48.3
     },
     {
@@ -45,15 +45,15 @@
       "horizon": "short",
       "factor": "rsi",
       "name": "RSI超買超賣",
-      "n": 158,
-      "hit_rate_pct": 51.3
+      "n": 159,
+      "hit_rate_pct": 50.9
     },
     {
       "horizon": "short",
       "factor": "bollinger",
       "name": "布林通道",
-      "n": 121,
-      "hit_rate_pct": 54.5
+      "n": 122,
+      "hit_rate_pct": 54.1
     },
     {
       "horizon": "medium",
@@ -85,6 +85,24 @@
     }
   ],
   "recent": [
+    {
+      "ticker": "1830.HK",
+      "horizon": "short",
+      "made_date": "2026-10-09",
+      "made_price": 1.16,
+      "predicted_direction": "up",
+      "horizon_score": 2,
+      "reasons": [
+        "RSI14 為 27.9，處於超賣區",
+        "股價跌破布林通道下軌，短線可能超跌"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-13",
+      "resolved_price": 1.16,
+      "actual_return_pct": -0.0,
+      "actual_direction": "down",
+      "hit": false
+    },
     {
       "ticker": "MSFT",
       "horizon": "medium",
@@ -449,26 +467,7 @@
       "actual_return_pct": 5.14,
       "actual_direction": "up",
       "hit": false
-    },
-    {
-      "ticker": "JD",
-      "horizon": "medium",
-      "made_date": "2026-09-14",
-      "made_price": 27.03,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "週線均線也維持多頭排列，日線訊號較不易是單純雜訊",
-        "50日均線在200日均線之上（多頭排列）",
-        "近60日走勢落後大盤 -5.7 個百分點"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-12",
-      "resolved_price": 26.915,
-      "actual_return_pct": -0.43,
-      "actual_direction": "down",
-      "hit": false
     }
   ],
-  "total_pending": 88
+  "total_pending": 104
 }
