@@ -3,7 +3,7 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 651,
+      "n": 674,
       "hit_rate_pct": 47.3
     },
     {
@@ -24,36 +24,36 @@
       "horizon": "short",
       "factor": "candlestick",
       "name": "K線形態",
-      "n": 157,
-      "hit_rate_pct": 44.6
+      "n": 161,
+      "hit_rate_pct": 44.1
     },
     {
       "horizon": "short",
       "factor": "volume",
       "name": "成交量confirm",
-      "n": 121,
-      "hit_rate_pct": 44.6
+      "n": 125,
+      "hit_rate_pct": 44.8
     },
     {
       "horizon": "short",
       "factor": "bollinger",
       "name": "布林通道",
-      "n": 168,
-      "hit_rate_pct": 48.8
-    },
-    {
-      "horizon": "short",
-      "factor": "macd",
-      "name": "MACD交叉",
-      "n": 148,
-      "hit_rate_pct": 49.3
+      "n": 181,
+      "hit_rate_pct": 48.6
     },
     {
       "horizon": "short",
       "factor": "rsi",
       "name": "RSI超買超賣",
-      "n": 184,
-      "hit_rate_pct": 49.5
+      "n": 187,
+      "hit_rate_pct": 49.2
+    },
+    {
+      "horizon": "short",
+      "factor": "macd",
+      "name": "MACD交叉",
+      "n": 151,
+      "hit_rate_pct": 49.7
     },
     {
       "horizon": "medium",
@@ -349,6 +349,23 @@
       "hit": false
     },
     {
+      "ticker": "NOK",
+      "horizon": "short",
+      "made_date": "2026-10-15",
+      "made_price": 9.07,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "股價跌破布林通道下軌，短線可能超跌"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-10-16",
+      "resolved_price": 9.14,
+      "actual_return_pct": 0.77,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
       "ticker": "1810.HK",
       "horizon": "short",
       "made_date": "2026-10-15",
@@ -366,44 +383,27 @@
       "hit": false
     },
     {
-      "ticker": "0020.HK",
+      "ticker": "DELL",
       "horizon": "short",
       "made_date": "2026-10-15",
-      "made_price": 1.14,
-      "predicted_direction": "down",
-      "horizon_score": -1,
+      "made_price": 462.755,
+      "predicted_direction": "up",
+      "horizon_score": 1,
       "reasons": [
-        "價格下跌且成交量放大、OBV 走弱，賣壓有量能支撐"
+        "股價跌破布林通道下軌，短線可能超跌"
       ],
       "status": "resolved",
       "resolved_date": "2026-10-16",
-      "resolved_price": 1.155,
-      "actual_return_pct": 1.32,
-      "actual_direction": "up",
+      "resolved_price": 451.71,
+      "actual_return_pct": -2.39,
+      "actual_direction": "down",
       "hit": false
     },
     {
-      "ticker": "2282.HK",
+      "ticker": "NTAP",
       "horizon": "short",
       "made_date": "2026-10-15",
-      "made_price": 9.625,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-10-16",
-      "resolved_price": 9.85,
-      "actual_return_pct": 2.34,
-      "actual_direction": "up",
-      "hit": false
-    },
-    {
-      "ticker": "0285.HK",
-      "horizon": "short",
-      "made_date": "2026-10-15",
-      "made_price": 22.38,
+      "made_price": 212.93,
       "predicted_direction": "down",
       "horizon_score": -1,
       "reasons": [
@@ -411,28 +411,28 @@
       ],
       "status": "resolved",
       "resolved_date": "2026-10-16",
-      "resolved_price": 22.04,
-      "actual_return_pct": -1.52,
+      "resolved_price": 203.8,
+      "actual_return_pct": -4.29,
       "actual_direction": "down",
       "hit": true
     },
     {
-      "ticker": "1919.HK",
+      "ticker": "SMCI",
       "horizon": "short",
       "made_date": "2026-10-15",
-      "made_price": 17.34,
-      "predicted_direction": "down",
-      "horizon_score": -1,
+      "made_price": 32.805,
+      "predicted_direction": "up",
+      "horizon_score": 1,
       "reasons": [
-        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
+        "股價跌破布林通道下軌，短線可能超跌"
       ],
       "status": "resolved",
       "resolved_date": "2026-10-16",
-      "resolved_price": 17.19,
-      "actual_return_pct": -0.87,
+      "resolved_price": 31.63,
+      "actual_return_pct": -3.58,
       "actual_direction": "down",
-      "hit": true
+      "hit": false
     }
   ],
-  "total_pending": 110
+  "total_pending": 106
 }
