@@ -1,12 +1,12 @@
 {
-  "n": 2038,
-  "hits": 942,
+  "n": 2077,
+  "hits": 959,
   "hit_rate_pct": 46.2,
   "by_market": [
     {
       "market": "HK",
-      "n": 1077,
-      "hit_rate_pct": 44.6
+      "n": 1116,
+      "hit_rate_pct": 44.5
     },
     {
       "market": "US",
