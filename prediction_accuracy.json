@@ -3,8 +3,8 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 1053,
-      "hit_rate_pct": 46.5
+      "n": 1069,
+      "hit_rate_pct": 46.6
     },
     {
       "horizon": "medium",
@@ -24,35 +24,35 @@
       "horizon": "short",
       "factor": "candlestick",
       "name": "K線形態",
-      "n": 250,
-      "hit_rate_pct": 43.6
+      "n": 252,
+      "hit_rate_pct": 43.3
     },
     {
       "horizon": "short",
       "factor": "volume",
       "name": "成交量confirm",
-      "n": 229,
-      "hit_rate_pct": 44.1
+      "n": 235,
+      "hit_rate_pct": 44.7
     },
     {
       "horizon": "short",
       "factor": "rsi",
       "name": "RSI超買超賣",
-      "n": 296,
-      "hit_rate_pct": 48.6
+      "n": 299,
+      "hit_rate_pct": 48.2
     },
     {
       "horizon": "short",
       "factor": "macd",
       "name": "MACD交叉",
-      "n": 226,
-      "hit_rate_pct": 49.1
+      "n": 230,
+      "hit_rate_pct": 49.6
     },
     {
       "horizon": "short",
       "factor": "bollinger",
       "name": "布林通道",
-      "n": 275,
+      "n": 277,
       "hit_rate_pct": 50.2
     },
     {
@@ -394,40 +394,39 @@
       "hit": true
     },
     {
-      "ticker": "3690.HK",
+      "ticker": "NTAP",
       "horizon": "short",
-      "made_date": "2026-10-30",
-      "made_price": 72.85,
+      "made_date": "2026-11-02",
+      "made_price": 190.3,
       "predicted_direction": "up",
-      "horizon_score": 2,
+      "horizon_score": 1,
       "reasons": [
-        "MACD 剛向上穿越訊號線",
-        "出現「看漲吞噬」K線形態，屬於價格行為的反轉訊號"
+        "股價跌破布林通道下軌，短線可能超跌"
       ],
       "status": "resolved",
-      "resolved_date": "2026-11-02",
-      "resolved_price": 71.75,
-      "actual_return_pct": -1.51,
-      "actual_direction": "down",
-      "hit": false
+      "resolved_date": "2026-11-03",
+      "resolved_price": 190.37,
+      "actual_return_pct": 0.04,
+      "actual_direction": "up",
+      "hit": true
     },
     {
-      "ticker": "0968.HK",
+      "ticker": "SMCI",
       "horizon": "short",
-      "made_date": "2026-10-30",
-      "made_price": 1.845,
+      "made_date": "2026-11-02",
+      "made_price": 31.287,
       "predicted_direction": "down",
       "horizon_score": -1,
       "reasons": [
-        "出現「上吊線」K線形態，屬於價格行為的反轉訊號"
+        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
       ],
       "status": "resolved",
-      "resolved_date": "2026-11-02",
-      "resolved_price": 1.8,
-      "actual_return_pct": -2.44,
-      "actual_direction": "down",
-      "hit": true
+      "resolved_date": "2026-11-03",
+      "resolved_price": 31.485,
+      "actual_return_pct": 0.63,
+      "actual_direction": "up",
+      "hit": false
     }
   ],
-  "total_pending": 98
+  "total_pending": 99
 }

@@ -1,6 +1,6 @@
 {
-  "n": 2431,
-  "hits": 1168,
+  "n": 2462,
+  "hits": 1181,
   "hit_rate_pct": 48.0,
   "by_market": [
     {
@@ -10,8 +10,8 @@
     },
     {
       "market": "US",
-      "n": 1116,
-      "hit_rate_pct": 50.0
+      "n": 1147,
+      "hit_rate_pct": 49.8
     }
   ]
 }
