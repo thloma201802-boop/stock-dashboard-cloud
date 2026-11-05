@@ -3,8 +3,8 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 1097,
-      "hit_rate_pct": 46.7
+      "n": 1116,
+      "hit_rate_pct": 46.9
     },
     {
       "horizon": "medium",
@@ -24,36 +24,36 @@
       "horizon": "short",
       "factor": "candlestick",
       "name": "K線形態",
-      "n": 258,
-      "hit_rate_pct": 43.4
+      "n": 267,
+      "hit_rate_pct": 43.1
     },
     {
       "horizon": "short",
       "factor": "volume",
       "name": "成交量confirm",
-      "n": 242,
-      "hit_rate_pct": 45.5
+      "n": 245,
+      "hit_rate_pct": 45.7
     },
     {
       "horizon": "short",
       "factor": "rsi",
       "name": "RSI超買超賣",
-      "n": 306,
-      "hit_rate_pct": 47.7
+      "n": 311,
+      "hit_rate_pct": 48.6
     },
     {
       "horizon": "short",
       "factor": "macd",
       "name": "MACD交叉",
-      "n": 237,
+      "n": 239,
       "hit_rate_pct": 49.8
     },
     {
       "horizon": "short",
       "factor": "bollinger",
       "name": "布林通道",
-      "n": 283,
-      "hit_rate_pct": 50.2
+      "n": 286,
+      "hit_rate_pct": 50.3
     },
     {
       "horizon": "medium",
@@ -85,6 +85,246 @@
     }
   ],
   "recent": [
+    {
+      "ticker": "1898.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 9.745,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "MACD 剛向上穿越訊號線"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 9.625,
+      "actual_return_pct": -1.23,
+      "actual_direction": "down",
+      "hit": false
+    },
+    {
+      "ticker": "0027.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 34.42,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "出現「上吊線」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 35.0,
+      "actual_return_pct": 1.69,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "3988.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 5.925,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "出現「看漲吞噬」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 6.035,
+      "actual_return_pct": 1.86,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "0700.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 392.8,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 427.2,
+      "actual_return_pct": 8.76,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "0020.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 1.06,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "股價跌破布林通道下軌，短線可能超跌"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 1.18,
+      "actual_return_pct": 11.32,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "2282.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 10.0,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "出現「上吊線」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 10.29,
+      "actual_return_pct": 2.9,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "9633.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 44.38,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "股價突破布林通道上軌，短線可能過熱"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 44.96,
+      "actual_return_pct": 1.31,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "1830.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 1.125,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "出現「流星線」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 1.16,
+      "actual_return_pct": 3.11,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "0981.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 43.04,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "RSI14 為 25.1，處於超賣區"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 47.82,
+      "actual_return_pct": 11.11,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "0285.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 20.32,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "股價跌破布林通道下軌，短線可能超跌"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 22.24,
+      "actual_return_pct": 9.45,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "1347.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 58.9,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "RSI14 為 24.0，處於超賣區"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 67.25,
+      "actual_return_pct": 14.18,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "3750.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 358.8,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "RSI14 為 28.9，處於超賣區",
+        "MACD 剛向上穿越訊號線",
+        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 395.0,
+      "actual_return_pct": 10.09,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "1177.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 4.855,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "出現「流星線」K線形態，屬於價格行為的反轉訊號"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 5.57,
+      "actual_return_pct": 14.73,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "9696.HK",
+      "horizon": "short",
+      "made_date": "2026-11-04",
+      "made_price": 22.62,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "RSI14 為 26.7，處於超賣區"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-05",
+      "resolved_price": 25.3,
+      "actual_return_pct": 11.85,
+      "actual_direction": "up",
+      "hit": true
+    },
     {
       "ticker": "0027.HK",
       "horizon": "short",
@@ -187,247 +427,7 @@
       "actual_return_pct": 0.41,
       "actual_direction": "up",
       "hit": false
-    },
-    {
-      "ticker": "0981.HK",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 42.3,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "RSI14 為 22.9，處於超賣區"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 43.04,
-      "actual_return_pct": 1.75,
-      "actual_direction": "up",
-      "hit": true
-    },
-    {
-      "ticker": "1919.HK",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 17.78,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 18.04,
-      "actual_return_pct": 1.46,
-      "actual_direction": "up",
-      "hit": false
-    },
-    {
-      "ticker": "1347.HK",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 59.3,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "RSI14 為 24.3，處於超賣區"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 58.9,
-      "actual_return_pct": -0.67,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "0883.HK",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 23.68,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "出現「上吊線」K線形態，屬於價格行為的反轉訊號"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 23.9,
-      "actual_return_pct": 0.93,
-      "actual_direction": "up",
-      "hit": false
-    },
-    {
-      "ticker": "9696.HK",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 23.34,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "RSI14 為 29.7，處於超賣區"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 22.62,
-      "actual_return_pct": -3.08,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "INTC",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 61.086,
-      "predicted_direction": "up",
-      "horizon_score": 2,
-      "reasons": [
-        "RSI14 為 24.3，處於超賣區",
-        "股價跌破布林通道下軌，短線可能超跌"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 57.33,
-      "actual_return_pct": -6.15,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "GOOGL",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 278.4,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "RSI14 為 21.0，處於超賣區"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 289.65,
-      "actual_return_pct": 4.04,
-      "actual_direction": "up",
-      "hit": true
-    },
-    {
-      "ticker": "AAPL",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 330.61,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "股價跌破布林通道下軌，短線可能超跌"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 351.17,
-      "actual_return_pct": 6.22,
-      "actual_direction": "up",
-      "hit": true
-    },
-    {
-      "ticker": "CVX",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 225.61,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "MACD 剛向下穿越訊號線"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 217.63,
-      "actual_return_pct": -3.54,
-      "actual_direction": "down",
-      "hit": true
-    },
-    {
-      "ticker": "ADM",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 71.82,
-      "predicted_direction": "up",
-      "horizon_score": 2,
-      "reasons": [
-        "RSI14 為 25.1，處於超賣區",
-        "股價跌破布林通道下軌，短線可能超跌"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 70.38,
-      "actual_return_pct": -2.01,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "FUTU",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 104.88,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "MACD 剛向上穿越訊號線"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 98.16,
-      "actual_return_pct": -6.41,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "CYN",
-      "horizon": "short",
-      "made_date": "2026-11-03",
-      "made_price": 0.335,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "RSI14 為 23.9，處於超賣區"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-04",
-      "resolved_price": 0.33,
-      "actual_return_pct": -1.49,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "0968.HK",
-      "horizon": "short",
-      "made_date": "2026-11-02",
-      "made_price": 1.8,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "出現「看跌吞噬」K線形態，屬於價格行為的反轉訊號"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-03",
-      "resolved_price": 1.85,
-      "actual_return_pct": 2.78,
-      "actual_direction": "up",
-      "hit": false
-    },
-    {
-      "ticker": "6060.HK",
-      "horizon": "short",
-      "made_date": "2026-11-02",
-      "made_price": 9.13,
-      "predicted_direction": "up",
-      "horizon_score": 1,
-      "reasons": [
-        "出現「看漲吞噬」K線形態，屬於價格行為的反轉訊號"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-03",
-      "resolved_price": 9.315,
-      "actual_return_pct": 2.03,
-      "actual_direction": "up",
-      "hit": true
     }
   ],
-  "total_pending": 99
+  "total_pending": 108
 }
