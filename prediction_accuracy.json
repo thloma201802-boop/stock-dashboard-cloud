@@ -3,7 +3,7 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 1312,
+      "n": 1316,
       "hit_rate_pct": 47.9
     },
     {
@@ -22,16 +22,16 @@
   "by_factor": [
     {
       "horizon": "short",
-      "factor": "volume",
-      "name": "成交量confirm",
-      "n": 300,
+      "factor": "candlestick",
+      "name": "K線形態",
+      "n": 328,
       "hit_rate_pct": 46.0
     },
     {
       "horizon": "short",
-      "factor": "candlestick",
-      "name": "K線形態",
-      "n": 327,
+      "factor": "volume",
+      "name": "成交量confirm",
+      "n": 303,
       "hit_rate_pct": 46.2
     },
     {
@@ -411,24 +411,22 @@
       "hit": true
     },
     {
-      "ticker": "1810.HK",
-      "horizon": "medium",
-      "made_date": "2026-10-14",
-      "made_price": 24.76,
+      "ticker": "9988.HK",
+      "horizon": "short",
+      "made_date": "2026-11-12",
+      "made_price": 93.8,
       "predicted_direction": "down",
-      "horizon_score": -3,
+      "horizon_score": -1,
       "reasons": [
-        "週線均線已轉空頭，日線訊號可能只是短線反彈",
-        "50日均線在200日均線之下（空頭排列）",
-        "近60日走勢落後大盤 -5.8 個百分點"
+        "價格下跌且成交量放大、OBV 走弱，賣壓有量能支撐"
       ],
       "status": "resolved",
-      "resolved_date": "2026-11-12",
-      "resolved_price": 30.3,
-      "actual_return_pct": 22.37,
-      "actual_direction": "up",
-      "hit": false
+      "resolved_date": "2026-11-13",
+      "resolved_price": 90.55,
+      "actual_return_pct": -3.46,
+      "actual_direction": "down",
+      "hit": true
     }
   ],
-  "total_pending": 92
+  "total_pending": 95
 }
