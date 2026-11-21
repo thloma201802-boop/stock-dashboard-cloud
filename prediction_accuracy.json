@@ -3,8 +3,8 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 1459,
-      "hit_rate_pct": 48.3
+      "n": 1462,
+      "hit_rate_pct": 48.4
     },
     {
       "horizon": "medium",
@@ -24,8 +24,8 @@
       "horizon": "short",
       "factor": "volume",
       "name": "成交量confirm",
-      "n": 327,
-      "hit_rate_pct": 46.8
+      "n": 330,
+      "hit_rate_pct": 47.0
     },
     {
       "horizon": "short",
@@ -433,5 +433,5 @@
       "hit": false
     }
   ],
-  "total_pending": 108
+  "total_pending": 116
 }
