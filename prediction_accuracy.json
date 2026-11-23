@@ -3,8 +3,8 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 1484,
-      "hit_rate_pct": 48.1
+      "n": 1507,
+      "hit_rate_pct": 48.3
     },
     {
       "horizon": "medium",
@@ -24,36 +24,36 @@
       "horizon": "short",
       "factor": "volume",
       "name": "成交量confirm",
-      "n": 337,
-      "hit_rate_pct": 46.9
-    },
-    {
-      "horizon": "short",
-      "factor": "rsi",
-      "name": "RSI超買超賣",
-      "n": 417,
-      "hit_rate_pct": 47.0
+      "n": 342,
+      "hit_rate_pct": 46.5
     },
     {
       "horizon": "short",
       "factor": "candlestick",
       "name": "K線形態",
-      "n": 369,
-      "hit_rate_pct": 47.2
+      "n": 370,
+      "hit_rate_pct": 47.0
+    },
+    {
+      "horizon": "short",
+      "factor": "rsi",
+      "name": "RSI超買超賣",
+      "n": 430,
+      "hit_rate_pct": 48.1
     },
     {
       "horizon": "short",
       "factor": "bollinger",
       "name": "布林通道",
-      "n": 376,
-      "hit_rate_pct": 49.5
+      "n": 380,
+      "hit_rate_pct": 49.7
     },
     {
       "horizon": "short",
       "factor": "macd",
       "name": "MACD交叉",
-      "n": 305,
-      "hit_rate_pct": 52.1
+      "n": 308,
+      "hit_rate_pct": 51.6
     },
     {
       "horizon": "medium",
@@ -369,27 +369,61 @@
       "hit": false
     },
     {
-      "ticker": "1299.HK",
+      "ticker": "MSFT",
       "horizon": "short",
       "made_date": "2026-11-20",
-      "made_price": 74.2,
-      "predicted_direction": "down",
-      "horizon_score": -1,
+      "made_price": 487.02,
+      "predicted_direction": "up",
+      "horizon_score": 1,
       "reasons": [
-        "價格下跌且成交量放大、OBV 走弱，賣壓有量能支撐"
+        "股價跌破布林通道下軌，短線可能超跌"
       ],
       "status": "resolved",
       "resolved_date": "2026-11-23",
-      "resolved_price": 73.7,
-      "actual_return_pct": -0.67,
-      "actual_direction": "down",
+      "resolved_price": 497.54,
+      "actual_return_pct": 2.16,
+      "actual_direction": "up",
       "hit": true
     },
     {
-      "ticker": "0285.HK",
+      "ticker": "NOK",
       "horizon": "short",
       "made_date": "2026-11-20",
-      "made_price": 17.81,
+      "made_price": 6.905,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "股價跌破布林通道下軌，短線可能超跌"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-23",
+      "resolved_price": 7.605,
+      "actual_return_pct": 10.14,
+      "actual_direction": "up",
+      "hit": true
+    },
+    {
+      "ticker": "SPCX",
+      "horizon": "short",
+      "made_date": "2026-11-20",
+      "made_price": 128.11,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "MACD 剛向下穿越訊號線"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-23",
+      "resolved_price": 133.83,
+      "actual_return_pct": 4.46,
+      "actual_direction": "up",
+      "hit": false
+    },
+    {
+      "ticker": "HPE",
+      "horizon": "short",
+      "made_date": "2026-11-20",
+      "made_price": 41.23,
       "predicted_direction": "up",
       "horizon_score": 1,
       "reasons": [
@@ -397,45 +431,11 @@
       ],
       "status": "resolved",
       "resolved_date": "2026-11-23",
-      "resolved_price": 17.82,
-      "actual_return_pct": 0.06,
+      "resolved_price": 48.32,
+      "actual_return_pct": 17.2,
       "actual_direction": "up",
-      "hit": true
-    },
-    {
-      "ticker": "1919.HK",
-      "horizon": "short",
-      "made_date": "2026-11-20",
-      "made_price": 17.19,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "出現「上吊線」K線形態，屬於價格行為的反轉訊號"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-23",
-      "resolved_price": 17.29,
-      "actual_return_pct": 0.58,
-      "actual_direction": "up",
-      "hit": false
-    },
-    {
-      "ticker": "3750.HK",
-      "horizon": "short",
-      "made_date": "2026-11-20",
-      "made_price": 335.0,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "價格下跌且成交量放大、OBV 走弱，賣壓有量能支撐"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-23",
-      "resolved_price": 331.4,
-      "actual_return_pct": -1.07,
-      "actual_direction": "down",
       "hit": true
     }
   ],
-  "total_pending": 118
+  "total_pending": 102
 }
