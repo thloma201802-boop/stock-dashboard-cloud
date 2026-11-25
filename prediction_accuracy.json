@@ -3,8 +3,8 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 1561,
-      "hit_rate_pct": 48.0
+      "n": 1569,
+      "hit_rate_pct": 48.1
     },
     {
       "horizon": "medium",
@@ -24,21 +24,21 @@
       "horizon": "short",
       "factor": "volume",
       "name": "成交量confirm",
-      "n": 350,
+      "n": 354,
       "hit_rate_pct": 46.0
     },
     {
       "horizon": "short",
       "factor": "candlestick",
       "name": "K線形態",
-      "n": 382,
+      "n": 384,
       "hit_rate_pct": 47.1
     },
     {
       "horizon": "short",
       "factor": "rsi",
       "name": "RSI超買超賣",
-      "n": 459,
+      "n": 461,
       "hit_rate_pct": 47.7
     },
     {
@@ -52,8 +52,8 @@
       "horizon": "short",
       "factor": "macd",
       "name": "MACD交叉",
-      "n": 314,
-      "hit_rate_pct": 51.3
+      "n": 315,
+      "hit_rate_pct": 51.4
     },
     {
       "horizon": "medium",
@@ -364,74 +364,73 @@
       "hit": false
     },
     {
-      "ticker": "1898.HK",
+      "ticker": "NOK",
       "horizon": "short",
-      "made_date": "2026-11-23",
-      "made_price": 9.52,
-      "predicted_direction": "down",
-      "horizon_score": -1,
-      "reasons": [
-        "MACD 剛向下穿越訊號線"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-24",
-      "resolved_price": 9.3,
-      "actual_return_pct": -2.31,
-      "actual_direction": "down",
-      "hit": true
-    },
-    {
-      "ticker": "3690.HK",
-      "horizon": "short",
-      "made_date": "2026-11-23",
-      "made_price": 65.1,
+      "made_date": "2026-11-24",
+      "made_price": 7.34,
       "predicted_direction": "up",
       "horizon_score": 1,
       "reasons": [
         "出現「槌子線」K線形態，屬於價格行為的反轉訊號"
       ],
       "status": "resolved",
-      "resolved_date": "2026-11-24",
-      "resolved_price": 64.55,
-      "actual_return_pct": -0.84,
+      "resolved_date": "2026-11-25",
+      "resolved_price": 7.235,
+      "actual_return_pct": -1.43,
       "actual_direction": "down",
       "hit": false
     },
     {
-      "ticker": "6060.HK",
+      "ticker": "HPE",
       "horizon": "short",
-      "made_date": "2026-11-23",
-      "made_price": 8.415,
-      "predicted_direction": "up",
-      "horizon_score": 2,
-      "reasons": [
-        "RSI14 為 27.8，處於超賣區",
-        "出現「槌子線」K線形態，屬於價格行為的反轉訊號"
-      ],
-      "status": "resolved",
-      "resolved_date": "2026-11-24",
-      "resolved_price": 8.195,
-      "actual_return_pct": -2.61,
-      "actual_direction": "down",
-      "hit": false
-    },
-    {
-      "ticker": "3988.HK",
-      "horizon": "short",
-      "made_date": "2026-11-23",
-      "made_price": 6.125,
+      "made_date": "2026-11-24",
+      "made_price": 40.17,
       "predicted_direction": "down",
       "horizon_score": -1,
       "reasons": [
-        "MACD 剛向下穿越訊號線"
+        "價格下跌且成交量放大、OBV 走弱，賣壓有量能支撐"
       ],
       "status": "resolved",
-      "resolved_date": "2026-11-24",
-      "resolved_price": 6.18,
-      "actual_return_pct": 0.9,
+      "resolved_date": "2026-11-25",
+      "resolved_price": 40.41,
+      "actual_return_pct": 0.6,
       "actual_direction": "up",
       "hit": false
+    },
+    {
+      "ticker": "DELL",
+      "horizon": "short",
+      "made_date": "2026-11-24",
+      "made_price": 296.3,
+      "predicted_direction": "down",
+      "horizon_score": -1,
+      "reasons": [
+        "價格下跌且成交量放大、OBV 走弱，賣壓有量能支撐"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-25",
+      "resolved_price": 292.11,
+      "actual_return_pct": -1.41,
+      "actual_direction": "down",
+      "hit": true
+    },
+    {
+      "ticker": "HPQ",
+      "horizon": "short",
+      "made_date": "2026-11-24",
+      "made_price": 28.525,
+      "predicted_direction": "up",
+      "horizon_score": 1,
+      "reasons": [
+        "MACD 剛向上穿越訊號線"
+      ],
+      "status": "resolved",
+      "resolved_date": "2026-11-25",
+      "resolved_price": 31.11,
+      "actual_return_pct": 9.06,
+      "actual_direction": "up",
+      "hit": true
     }
   ],
-  "total_pending": 97
+  "total_pending": 102
 }
