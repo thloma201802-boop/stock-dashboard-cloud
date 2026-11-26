@@ -4,11 +4,11 @@
     "name": "週線趨勢",
     "horizon": "medium",
     "horizon_days": 20,
-    "events": 19731,
+    "events": 19692,
     "hit_rate_pct": 53.0,
-    "avg_return_when_fired_pct": 1.09,
-    "avg_return_baseline_pct": 1.38,
-    "edge_pct": -0.29,
+    "avg_return_when_fired_pct": 1.08,
+    "avg_return_baseline_pct": 1.39,
+    "edge_pct": -0.3,
     "weak": true
   },
   {
@@ -16,11 +16,11 @@
     "name": "相對大盤強弱",
     "horizon": "medium",
     "horizon_days": 20,
-    "events": 22516,
-    "hit_rate_pct": 53.3,
+    "events": 22487,
+    "hit_rate_pct": 53.2,
     "avg_return_when_fired_pct": 0.98,
-    "avg_return_baseline_pct": 1.38,
-    "edge_pct": -0.4,
+    "avg_return_baseline_pct": 1.39,
+    "edge_pct": -0.41,
     "weak": true
   },
   {
@@ -28,11 +28,11 @@
     "name": "成交量confirm",
     "horizon": "short",
     "horizon_days": 10,
-    "events": 5612,
+    "events": 5609,
     "hit_rate_pct": 49.5,
-    "avg_return_when_fired_pct": 0.19,
-    "avg_return_baseline_pct": 0.6,
-    "edge_pct": -0.41,
+    "avg_return_when_fired_pct": 0.18,
+    "avg_return_baseline_pct": 0.61,
+    "edge_pct": -0.43,
     "weak": true
   },
   {
@@ -43,8 +43,8 @@
     "events": 633,
     "hit_rate_pct": 52.3,
     "avg_return_when_fired_pct": 0.96,
-    "avg_return_baseline_pct": 1.38,
-    "edge_pct": -0.42,
+    "avg_return_baseline_pct": 1.39,
+    "edge_pct": -0.43,
     "weak": true
   },
   {
@@ -52,11 +52,11 @@
     "name": "均線多空排列",
     "horizon": "medium",
     "horizon_days": 20,
-    "events": 18969,
+    "events": 18930,
     "hit_rate_pct": 52.9,
     "avg_return_when_fired_pct": 0.88,
-    "avg_return_baseline_pct": 1.38,
-    "edge_pct": -0.5,
+    "avg_return_baseline_pct": 1.39,
+    "edge_pct": -0.51,
     "weak": true
   },
   {
@@ -64,11 +64,11 @@
     "name": "布林通道",
     "horizon": "short",
     "horizon_days": 10,
-    "events": 3470,
+    "events": 3469,
     "hit_rate_pct": 51.3,
     "avg_return_when_fired_pct": 0.05,
-    "avg_return_baseline_pct": 0.6,
-    "edge_pct": -0.55,
+    "avg_return_baseline_pct": 0.61,
+    "edge_pct": -0.56,
     "weak": true
   },
   {
@@ -79,8 +79,8 @@
     "events": 2783,
     "hit_rate_pct": 49.0,
     "avg_return_when_fired_pct": -0.15,
-    "avg_return_baseline_pct": 0.6,
-    "edge_pct": -0.75,
+    "avg_return_baseline_pct": 0.61,
+    "edge_pct": -0.76,
     "weak": true
   },
   {
@@ -88,11 +88,11 @@
     "name": "K線形態",
     "horizon": "short",
     "horizon_days": 10,
-    "events": 3298,
-    "hit_rate_pct": 48.2,
-    "avg_return_when_fired_pct": -0.3,
-    "avg_return_baseline_pct": 0.6,
-    "edge_pct": -0.9,
+    "events": 3295,
+    "hit_rate_pct": 48.1,
+    "avg_return_when_fired_pct": -0.31,
+    "avg_return_baseline_pct": 0.61,
+    "edge_pct": -0.92,
     "weak": true
   },
   {
@@ -100,11 +100,11 @@
     "name": "RSI超買超賣",
     "horizon": "short",
     "horizon_days": 10,
-    "events": 3854,
+    "events": 3853,
     "hit_rate_pct": 48.8,
     "avg_return_when_fired_pct": -1.07,
-    "avg_return_baseline_pct": 0.6,
-    "edge_pct": -1.67,
+    "avg_return_baseline_pct": 0.61,
+    "edge_pct": -1.68,
     "weak": true
   },
   {
@@ -112,11 +112,11 @@
     "name": "RSI背離",
     "horizon": "medium",
     "horizon_days": 20,
-    "events": 7070,
+    "events": 7056,
     "hit_rate_pct": 47.3,
     "avg_return_when_fired_pct": -1.07,
-    "avg_return_baseline_pct": 1.38,
-    "edge_pct": -2.46,
+    "avg_return_baseline_pct": 1.39,
+    "edge_pct": -2.45,
     "weak": true
   }
 ]
