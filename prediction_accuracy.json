@@ -3,7 +3,7 @@
     {
       "horizon": "short",
       "label": "短線（下一個交易日）",
-      "n": 1618,
+      "n": 1620,
       "hit_rate_pct": 48.6
     },
     {
@@ -38,8 +38,8 @@
       "horizon": "short",
       "factor": "rsi",
       "name": "RSI超買超賣",
-      "n": 488,
-      "hit_rate_pct": 49.0
+      "n": 489,
+      "hit_rate_pct": 49.1
     },
     {
       "horizon": "short",
@@ -52,8 +52,8 @@
       "horizon": "short",
       "factor": "macd",
       "name": "MACD交叉",
-      "n": 320,
-      "hit_rate_pct": 51.6
+      "n": 321,
+      "hit_rate_pct": 51.4
     },
     {
       "horizon": "medium",
@@ -429,5 +429,5 @@
       "hit": true
     }
   ],
-  "total_pending": 97
+  "total_pending": 105
 }
